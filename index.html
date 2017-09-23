@@ -15,6 +15,8 @@
 
 <body>
 
+    <!-- SCREEN 1: INPUT STATE -->
+
     <form role="form" action="" id="state-form">
         <p>Who runs your state?</p>
         <label for "my-input">
@@ -22,9 +24,30 @@
             </label>
         <button role="button" type="submit" id="my-state" value="state-submit">Find</button>
     </form>
-    <section>
 
+    <!-- SCREEN 2: LIST POLITICIAN NAMES -->
+
+    <section role="region" id="list-names">
+        <div id="house">
+            <h2>House Members</h2>
+            <ul id="house-members">
+                <li><a href="#">name 1</a></li>
+                <li><a href="#">name 2</a></li>
+                <li><a href="#">name 3</a></li>
+                <li><a href="#">name 4</a></li>
+                <li><a href="#">name 5</a></li>
+                <li><a href="#">name 6</a></li>
+            </ul>
+        </div>
+        <div id="senate">
+            <h2>Senate Members</h2>
+            <ul id="senate-members">
+                <li><a href="#">name 1</a></li>
+                <li><a href="#">name 2</a></li>
+            </ul>
+        </div>
     </section>
+
     <script href="app.js"></script>
 </body>
 
