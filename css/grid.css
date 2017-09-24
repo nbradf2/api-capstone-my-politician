@@ -24,6 +24,7 @@
 .col-3,
 .col-4,
 .col-6,
+.col-8,
 .col-9,
 .col-12 {
     float: left;
@@ -39,7 +40,7 @@
 .col-3,
 .col-4,
 .col-6,
-.col-9,
+.col-8 .col-9,
 .col-12 {
     width: 100%;
 }
@@ -55,10 +56,13 @@
         width: 25%;
     }
     .col-4 {
-        width: 33.33%;
+        width: 33%;
     }
     .col-6 {
         width: 50%;
+    }
+    .col-8 {
+        width: 66%;
     }
     .col-9 {
         width: 75%;

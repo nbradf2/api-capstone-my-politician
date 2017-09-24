@@ -126,6 +126,7 @@ main form {
 
 main form p {
     font-size: 3rem;
+    padding-top: 1rem;
     padding-bottom: 2rem;
 }
 
@@ -177,8 +178,8 @@ main section div ul li {
 /** Contact Info **/
 
 main section img {
-    padding-top: 1rem;
-    max-width: 75%;
+    margin-top: 1.5rem;
+    max-width: 100%;
     margin-left: 0;
     margin-right: 0;
 }
@@ -187,8 +188,15 @@ main section #party {
     text-align: center;
 }
 
+main section #contact-info {
+    margin-left: 1rem;
+    margin-top: .4rem;
+    box-shadow: 0;
+    max-width: 73%;
+}
 
-/** News **/
+
+/** News & Wiki **/
 
 main section article {
     padding-top: 2rem;
@@ -198,5 +206,3 @@ main section article {
 
 
 /** Wiki **/
-
-main section
