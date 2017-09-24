@@ -1,3 +1,17 @@
+/***** COLORS - DELETE BEFORE SUBMITTING *****/
+
+
+/*
+    background: 'payne's grey' (blue): #546a7b
+    text - smokey black: #100d10
+    section background: 'Isabelline' (white): #fF2F4EB
+    unknown: 'dark coral' (orange): cf5c36
+    unknown: 'pastel yellow': #fffd82
+    borders/input text: yellow/gold: #E2C044
+article border: light yellow (flax): #ECD688
+*/
+
+
 /***** CSS RESET *****/
 
 * {
@@ -16,5 +30,145 @@
     -webkit-padding-start: 0px;
     -webkit-padding-end: 0px;
     /*  DELETE BEFORE SUBMITTING  */
-    border: 1px solid grey
+    /*    border: 1px solid grey*/
 }
+
+
+/***** GENERAL STYLES *****/
+
+body {
+    background-color: #546a7b;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 22px;
+    color: #100d10;
+}
+
+a {
+    text-decoration: none;
+    color: #100d10;
+}
+
+a:hover {
+    font-weight: 700;
+}
+
+a:visited {
+    /*    color: #cf5c36;*/
+}
+
+header,
+form,
+#list-names,
+#info-section,
+#contact-info,
+#news-section,
+#wiki-section {
+    background-color: #F2F4EB;
+    max-width: 1000px;
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+}
+
+header h1 {
+    text-align: center;
+    font-size: 4rem;
+}
+
+main section h2 {
+    text-align: center;
+    font-size: 1.8rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #E2C044;
+}
+
+main section div {
+    margin-bottom: 1rem;
+}
+
+
+/***** SCREEN 1: INPUT STATE *****/
+
+main form {
+    text-align: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+main form p {
+    font-size: 2rem;
+    padding-bottom: .5rem;
+}
+
+main form input {
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 1.5rem;
+    border-radius: 5px;
+    border-bottom: 1px solid 546a7b;
+    height: 50px;
+    background-color: F2F4EB
+}
+
+main form input::placeholder {
+    padding-left: 10px;
+    color: #E2C044;
+}
+
+main form button {
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 1.5rem;
+    width: 100px;
+    height: 50px;
+    border-radius: 5px;
+    margin-left: 1rem;
+}
+
+
+/***** SCREEN 2: LIST POLITICIAN NAMES *****/
+
+main section #house,
+main section #senate {
+    padding-top: 2rem;
+}
+
+main section div ul li {
+    list-style: none;
+    line-height: 50px;
+}
+
+
+/***** SCREEN 3: RESULTS SECTION *****/
+
+
+/** Contact Info **/
+
+main section img {
+    padding-top: 1rem;
+}
+
+main section #party {
+    text-align: center;
+}
+
+
+/** News **/
+
+main section article {
+    padding-top: 2rem;
+    margin-top: .5rem;
+}
+
+main section #news-section article:nth-child(3) {
+    border-left: 1px solid #ECD688;
+    border-right: 1px solid #ECD688;
+}
+
+
+/** Wiki **/
+
+main section
