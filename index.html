@@ -6,7 +6,7 @@
     <meta name="description" content="Find out who the politicians are in your state.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>My Politician</title>
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700|Open+Sans+Condensed:300,700" rel="stylesheet">
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/grid.css">
     <link rel="stylesheet" href="css/main.css">
@@ -14,8 +14,9 @@
 
 <body>
 
-    <header role="banner">
-        <h1>My Politician</h1>
+    <header role="banner" class="row">
+        <h1><a href="index.html">My Politician</a></h1>
+        <p>...who speaks for your state?</p>
     </header>
 
     <main>
@@ -23,7 +24,7 @@
         <!-- SCREEN 1: INPUT STATE -->
 
         <form role="form" action="" id="state-form">
-            <p>Who runs your state?</p>
+            <p>What's your state?</p>
             <label for="my-input"></label>
             <input type="text" id="my-input" class="blinking-cursor" name="my-input" placeholder="i.e. Illinois">
             <button role="button" type="submit" id="my-state" value="state-submit">Find</button>
@@ -32,7 +33,7 @@
         <!-- SCREEN 2: LIST POLITICIAN NAMES -->
 
         <section role="region" id="list-names" class="row">
-            <h2>CHOOSE YOUR POLITICIAN</h2>
+            <h2>Who do you want to know about?</h2>
 
             <div id="house" class="col-6">
                 <h3>House Members</h3>
@@ -60,20 +61,22 @@
             <!-- Information Section -->
 
             <div id="info-section" class="row">
-                <h2 id="pol-name">[POLITICIAN'S NAME]</h2>
+                <h2 id="pol-name" class="col-12">[POLITICIAN'S NAME]</h2>
                 <!-- Image & Party info -->
-                <div id="img-party" class="col-3">
-                    <img src="http://www.fillmurray.com/200/300" alt="Image of [politician's name]" id="pol-img">
-                    <p id="party">Democratic Party</p>
-                </div>
-                <!-- Name & Contact info -->
-                <div id="contact-info" class="col-9">
-                    <div id="contact">
-                        <h3>Contact Info</h3>
-                        <p><a href="#">Facebook</a></p>
-                        <p><a href="#">Twitter</a></p>
-                        <p><a href="#">Email</a></p>
-                        <p>Phone Number</p>
+                <div class="row">
+                    <div id="img-party" class="col-3">
+                        <img src="http://www.fillmurray.com/200/300" alt="Image of [politician's name]" id="pol-img">
+                        <p id="party">Democratic Party</p>
+                    </div>
+                    <!-- Name & Contact info -->
+                    <div id="contact-info" class="row">
+                        <div id="contact" class="col-6">
+                            <h3>Contact Info</h3>
+                            <p><a href="#">Facebook</a></p>
+                            <p><a href="#">Twitter</a></p>
+                            <p><a href="#">Email</a></p>
+                            <p>Phone Number</p>
+                        </div>
                     </div>
                 </div>
             </div>

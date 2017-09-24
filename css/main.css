@@ -3,12 +3,13 @@
 
 /*
     background: 'payne's grey' (blue): #546a7b
+    lighter background: 'cadet grey': #92A0AB
     text - smokey black: #100d10
     section background: 'Isabelline' (white): #fF2F4EB
     unknown: 'dark coral' (orange): cf5c36
     unknown: 'pastel yellow': #fffd82
     borders/input text: yellow/gold: #E2C044
-article border: light yellow (flax): #ECD688
+    article border: light yellow (flax): #ECD688
 */
 
 
@@ -38,6 +39,7 @@ article border: light yellow (flax): #ECD688
 
 body {
     background-color: #546a7b;
+    background-image: url("data:image/svg+xml,%3Csvg width='52' height='26' viewBox='0 0 52 26' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2392a0ab' fill-opacity='0.06'%3E%3Cpath d='M10 10c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4v2c-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6zm25.464-1.95l8.486 8.486-1.414 1.414-8.486-8.486 1.414-1.414z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
     font-family: 'Open Sans Condensed', sans-serif;
     font-size: 22px;
     color: #100d10;
@@ -45,7 +47,7 @@ body {
 
 a {
     text-decoration: none;
-    color: #100d10;
+    color: inherit;
 }
 
 a:hover {
@@ -56,7 +58,6 @@ a:visited {
     /*    color: #cf5c36;*/
 }
 
-header,
 form,
 #list-names,
 #info-section,
@@ -69,14 +70,11 @@ form,
     margin: 0 auto;
     margin-top: 1rem;
     margin-bottom: 1rem;
-    border-radius: 5px;
+    /*    border-radius: 5px;*/
     padding-top: 1rem;
     padding-bottom: 2rem;
-}
-
-header h1 {
-    text-align: center;
-    font-size: 4rem;
+    box-shadow: 2px 2px 2px #100d10;
+    vertical-align: middle;
 }
 
 main section h2 {
@@ -89,6 +87,31 @@ main section h2 {
 
 main section div {
     margin-bottom: 1rem;
+}
+
+
+/***** HEADER *****/
+
+header {
+    color: #f1f4eb
+}
+
+header h1 {
+    font-family: 'Lora', serif;
+    font-size: 5rem;
+    margin-bottom: 1rem;
+    font-variant: small-caps;
+    letter-spacing: 2px;
+    text-shadow: 3px 3px #7C6926;
+}
+
+header p {
+    font-size: 2.5rem;
+    padding-top: 1rem;
+    padding-bottom: 1.5rem;
+    text-align: right;
+    text-shadow: 3px 3px #7C6926;
+    border-top: 1px solid #e2c044;
 }
 
 
@@ -109,7 +132,7 @@ main form p {
 main form input {
     font-family: 'Open Sans Condensed', sans-serif;
     font-size: 1.5rem;
-    border-radius: 5px;
+    /*    border-radius: 5px;*/
     border-bottom: 1px solid #E2C044;
     height: 4rem;
     width: 20rem;
@@ -155,6 +178,9 @@ main section div ul li {
 
 main section img {
     padding-top: 1rem;
+    max-width: 75%;
+    margin-left: 0;
+    margin-right: 0;
 }
 
 main section #party {
@@ -167,11 +193,7 @@ main section #party {
 main section article {
     padding-top: 2rem;
     margin-top: .5rem;
-}
-
-main section #news-section article:nth-child(3) {
-    border-left: 1px solid #ECD688;
-    border-right: 1px solid #ECD688;
+    box-shadow: 2px 1px 3px #ECD688;
 }
 
 
