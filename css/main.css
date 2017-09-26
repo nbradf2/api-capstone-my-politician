@@ -1,17 +1,15 @@
 /***** COLORS - DELETE BEFORE SUBMITTING *****/
 
-
 /*
     background: 'payne's grey' (blue): #546a7b
-    lighter background: 'cadet grey': #92A0AB
+    lighter background: 'cadet grey': #92a0ab
     text - smokey black: #100d10
-    section background: 'Isabelline' (white): #fF2F4EB
+    section background: 'Isabelline' (white): #ff2f4eb
     unknown: 'dark coral' (orange): cf5c36
     unknown: 'pastel yellow': #fffd82
-    borders/input text: yellow/gold: #E2C044
-    article border: light yellow (flax): #ECD688
+    borders/input text: yellow/gold: #e2c044
+    article border: light yellow (flax): #ecd688
 */
-
 
 /***** CSS RESET *****/
 
@@ -64,11 +62,11 @@ form,
 #contact-info,
 #news-section,
 #wiki-section {
-    background-color: #F2F4EB;
+    background-color: #f2f4eb;
     max-width: 1000px;
     width: 90%;
     margin: 0 auto;
-    margin-top: 1rem;
+    margin-top: 3rem;
     margin-bottom: 1rem;
     /*    border-radius: 5px;*/
     padding-top: 1rem;
@@ -82,7 +80,7 @@ main section h2 {
     font-size: 1.8rem;
     padding-top: 1rem;
     padding-bottom: 1rem;
-    border-bottom: 1px solid #E2C044;
+    border-bottom: 1px solid #e2c044;
 }
 
 main section div {
@@ -102,7 +100,7 @@ header h1 {
     margin-bottom: 1rem;
     font-variant: small-caps;
     letter-spacing: 2px;
-    text-shadow: 3px 3px #7C6926;
+    text-shadow: 3px 3px #7c6926;
 }
 
 header p {
@@ -110,7 +108,7 @@ header p {
     padding-top: 1rem;
     padding-bottom: 1.5rem;
     text-align: right;
-    text-shadow: 3px 3px #7C6926;
+    text-shadow: 3px 3px #7c6926;
     border-top: 1px solid #e2c044;
 }
 
@@ -118,7 +116,7 @@ header p {
 /***** SCREEN 1: INPUT STATE *****/
 
 main form {
-    height: 15rem;
+    height: 20rem;
     text-align: center;
     padding-top: 1rem;
     padding-bottom: 1rem;
@@ -126,25 +124,25 @@ main form {
 
 main form p {
     font-size: 3rem;
-    padding-top: 1rem;
-    padding-bottom: 2rem;
+    padding-top: 3rem;
+    padding-bottom: 2.5rem;
 }
 
 main form input {
     font-family: 'Open Sans Condensed', sans-serif;
     font-size: 1.5rem;
     /*    border-radius: 5px;*/
-    border-bottom: 1px solid #E2C044;
+    border-bottom: 1px solid #e2c044;
     height: 4rem;
     width: 20rem;
-    background-color: #F2F4EB;
+    background-color: #f2f4eb;
     padding-left: 1rem;
-    color: #7C6926;
+    color: #7c6926;
 }
 
 main form input::placeholder {
     padding-left: .8rem;
-    color: #E2C044;
+    color: #e2c044;
 }
 
 main form button {
@@ -154,16 +152,21 @@ main form button {
     height: 4rem;
     /*    border-radius: 5px;*/
     margin-left: -8px;
-    background-color: #F2F4EB;
-    border: 1px solid #E2C044;
+    background-color: #f2f4eb;
+    border: 1px solid #e2c044;
 }
 
+main form .invalid-text {
+    color: #af1b3f;
+    font-size: 1.5rem;
+}
 
 /***** SCREEN 2: LIST POLITICIAN NAMES *****/
 
 main section #house,
 main section #senate {
     padding-top: 2rem;
+    text-align: center;
 }
 
 main section div ul li {
@@ -173,7 +176,6 @@ main section div ul li {
 
 
 /***** SCREEN 3: RESULTS SECTION *****/
-
 
 /** Contact Info **/
 
@@ -199,9 +201,9 @@ main section #contact-info {
 /** News & Wiki **/
 
 main section article {
-    padding-top: 2rem;
+    padding-top: 1rem;
     margin-top: .5rem;
-    box-shadow: 2px 1px 3px #ECD688;
+    box-shadow: 2px 1px 3px #ecd688;
 }
 
 

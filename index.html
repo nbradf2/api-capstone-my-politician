@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="description" content="Find out who the politicians are in your state.">
+    <meta name="description" content="Find out who the politicians are that speak for your state.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>My Politician</title>
     <link href="https://fonts.googleapis.com/css?family=Lora:400,700|Open+Sans+Condensed:300,700" rel="stylesheet">
@@ -24,10 +24,11 @@
         <!-- SCREEN 1: INPUT STATE -->
 
         <form role="form" action="" id="state-form">
-            <p>What's your state?</p>
-            <label for="my-input"></label>
-            <input type="text" id="my-input" class="blinking-cursor" name="my-input" placeholder="i.e. Illinois">
-            <button role="button" type="submit" id="my-state" value="state-submit">Find</button>
+            <p>Enter your state</p>
+            <label for="my-state"></label>
+            <input type="text" id="my-state" name="my-state" placeholder="i.e. Illinois">
+            <button role="button" type="submit" id="state-submit" value="state-submit">Find</button>
+            <!--<p class="invalid-text">Uh oh! Looks like you forgot to add the state you're looking for!</p>-->
         </form>
 
         <!-- SCREEN 2: LIST POLITICIAN NAMES -->
@@ -103,8 +104,8 @@
             </div>
         </section>
     </main>
-    <script href="https://code.jquery.com/jquery-3.2.1.js"></script>
-    <script href="app.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <script src="app.js"></script>
 </body>
 
 </html>
