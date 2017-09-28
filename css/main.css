@@ -128,7 +128,7 @@ main form p {
     padding-bottom: 2.5rem;
 }
 
-main form input {
+main form select {
     font-family: 'Open Sans Condensed', sans-serif;
     font-size: 1.5rem;
     /*    border-radius: 5px;*/

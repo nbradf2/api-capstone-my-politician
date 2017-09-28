@@ -19,36 +19,12 @@ let userState = '';
 function getStateInput() {
     //    alert("getStateInput() activated!");
 
-    // get value of input box:
-    userState = $('#my-state').val().toLowerCase();
+    // get value of selected state:
+    userState = $('#my-state').val();
 
-    // test ****console.log() not working****
+    // test
     console.log(userState);
 
-    // INPUT VALIDATION
-
-    // if state does not match item in validateState array:
-
-    if (userState == "") {
-        $('#my-state').val('');
-        $('#state-form').append(blankMessage);
-
-    } else if (validateState.includes(userState) === false) {
-        $('#my-state').val('');
-        $('#state-form').append(errorMessage);
-    }
-    // if state matches item in validateState array
-    else {
-        // alert(`State is ${userState}!`);
-        $('#state-form').find(errorMessage).remove();
-        getProPublicaInfo(userState);
-    }
-
-    // to clear user input and error message on focus:
-    $('#my-state').keydown(function () {
-        $('#state-form').find(errorMessage).remove();
-        $('#state-form').find(blankMessage).remove();
-    })
 };
 
 // get ProPublica API:
@@ -100,14 +76,15 @@ $(document).ready(function () {
 
     // At start, only show form (id: #state-form)
 
-    //    $("#list-names").hide();
-    //    $("#results-section").hide();
-    //    $("#state-form").show();
+    $("#list-names").hide();
+    $("#results-section").hide();
+    $("#state-form").show();
 
     // On click #state-submit activate getStateInput() function
 
-    $('#state-submit').on('click', function () {
+    $('#my-state').on('change', function () {
         event.preventDefault();
+
         getStateInput();
 
 
