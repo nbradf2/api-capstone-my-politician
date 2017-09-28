@@ -165,8 +165,12 @@ main form .invalid-text {
 
 main section #house,
 main section #senate {
-    padding-top: 2rem;
+    margin-top: 2rem;
     text-align: center;
+}
+
+main section #house {
+    border-right: 1px solid #e2c044;
 }
 
 main section div ul li {
