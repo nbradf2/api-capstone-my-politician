@@ -3,6 +3,9 @@
  *****************************/
 
 let userState = '';
+let politicianName = '';
+let facebookName = '';
+let twitterName = '';
 
 /******************************
  FUNCTION DEFINITIONS
@@ -21,11 +24,70 @@ function getStateInput() {
 
 };
 
+var politicianNameDetails = "";
+
+function getAllUrlParams(url) {
+
+    // get query string from url (optional) or window
+    var queryString = url ? url.split('?')[1] : window.location.search.slice(1);
+
+    // we'll store the parameters here
+    var obj = {};
+
+    // if query string exists
+    if (queryString) {
+
+        // stuff after # is not part of query string, so get rid of it
+        queryString = queryString.split('#')[0];
+
+        // split our query string into its component parts
+        var arr = queryString.split('&');
+
+        for (var i = 0; i < arr.length; i++) {
+            // separate the keys and the values
+            var a = arr[i].split('=');
+
+            // in case params look like: list[]=thing1&list[]=thing2
+            var paramNum = undefined;
+            var paramName = a[0].replace(/\[\d*\]/, function (v) {
+                paramNum = v.slice(1, -1);
+                return '';
+            });
+
+            // set parameter value (use 'true' if empty)
+            var paramValue = typeof (a[1]) === 'undefined' ? true : a[1];
+
+            // if parameter name already exists
+            if (obj[paramName]) {
+                // convert value to array (if still string)
+                if (typeof obj[paramName] === 'string') {
+                    obj[paramName] = [obj[paramName]];
+                }
+                // if no array index number specified...
+                if (typeof paramNum === 'undefined') {
+                    // put the value on the end of the array
+                    obj[paramName].push(paramValue);
+                }
+                // if array index number specified...
+                else {
+                    // put the value at that index number
+                    obj[paramName][paramNum] = paramValue;
+                }
+            }
+            // if param name doesn't exist yet, set it
+            else {
+                obj[paramName] = paramValue;
+            }
+        }
+    }
+
+    return obj;
+}
+
+
+
 // get ProPublica API (House):
-
 function getProPublicaHouse(userState) {
-
-    // House
 
     var resultHouse = $.ajax({
             /* https://projects.propublica.org/api-docs/congress-api/members/#get-current-members-by-statedistrict*/
@@ -52,21 +114,21 @@ function getProPublicaHouse(userState) {
         });
 };
 
+// Build list of House members
 function displayHouseResults(houseArray) {
 
     let buildHouseMembers = "";
 
     $.each(houseArray.results, function (houseArrayKey, houseArrayValue) {
         buildHouseMembers +=
-            `<li><a href="#">${houseArrayValue.name}</a></li>`
+            `<li><a href="/?name=${encodeURI(houseArrayValue.name)}">${houseArrayValue.name}</a></li>`
 
         //show in HTML
         $('#house ul').html(buildHouseMembers)
     })
 }
 
-
-// Senate
+// get ProPublica API (Senate):
 function getProPublicaSenate(userState) {
 
     var resultSenate = $.ajax({
@@ -94,19 +156,34 @@ function getProPublicaSenate(userState) {
         });
 };
 
-
+// Build list of Senate members
 function displaySenateResults(senateArray) {
 
     let buildSenateMembers = "";
 
     $.each(senateArray.results, function (senateArrayKey, senateArrayValue) {
         buildSenateMembers +=
-            `<li><a href="#">${senateArrayValue.name}</a></li>`
+            `<li><a href="/?name=${encodeURI(senateArrayValue.name)}">${senateArrayValue.name}</a></li>`
 
         //show in HTML
         $('#senate ul').html(buildSenateMembers)
     })
 }
+
+// Get name of person clicked on
+
+function getPoliticianName(politicianNameDetails) {
+
+    $("#info-section h2").text(politicianNameDetails);
+    //    $('#senate-members').on('click', function {
+    //        politicianName =
+    //            '<h2 id="pol-name">' + senateArrayValue.name + '</h2>';
+    //        console.log(politicianName);
+    //
+    //        // show in HTML
+    //        $('#pol-name').html(politicianName);
+    //    })
+};
 
 
 /******************************
@@ -114,15 +191,36 @@ FUNCTION USAGE
 ******************************/
 $(document).ready(function () {
 
+
     // #STATE-FORM
 
     // At start, only show form (id: #state-form)
 
-    $("#list-names").hide();
-    $("#results-section").hide();
-    $("#state-form").show();
+    politicianNameDetails = decodeURI(getAllUrlParams().name);
 
-    // On click #state-submit activate getStateInput() function
+    console.log("mame ==> ", politicianNameDetails);
+    console.log("urlParams ==> ", Object.keys(getAllUrlParams()).length);
+
+
+    //no name defined
+    if ((Object.keys(getAllUrlParams()).length == 0) || (politicianNameDetails == '') || (politicianNameDetails === undefined)) {
+        console.log("name-undefined");
+        $("#list-names").hide();
+        $("#results-section").hide();
+        $("#state-form").show();
+
+    }
+    //name defined
+    else {
+        console.log("name-defined");
+        $("#state-form").hide();
+        $("#list-names").hide();
+        $("#results-section").show();
+
+        getPoliticianName(politicianNameDetails);
+    }
+
+    // On change #state-submit activate getStateInput() function
 
     $('#my-state').on('change', function () {
         event.preventDefault();
@@ -140,6 +238,19 @@ $(document).ready(function () {
         $("#list-names").show();
 
     })
+
+    // # LIST-NAMES
+
+    // on click #house-members or #senate-members (this), show #results-section
+
+    //    $('#list-names').on('click', function () {
+    //
+    //        $("#state-form").hide();
+    //        $("#list-names").hide();
+    //        $("#results-section").show();
+    //
+    //        getPoliticianName();
+    //    })
 
 
 
