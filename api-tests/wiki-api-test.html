@@ -8,14 +8,29 @@
     <script type="text/javascript">
         $(document).ready(function() {
 
-//            let data = { // query: 'xxx', // limit: 'max', // }
+            // let data = { // query: 'xxx', // limit: 'max', // }
+            var data = 'Mitt Romney'
 
-            var txt = "tammy baldwin";
+            var url = 'https://en.wikipedia.org/w/api.php';
+            url += '?' + $.param({
+                'action': 'query',
+                'format': 'json',
+                'prop': 'pageimages|extracts',
+                'generator': 'search',
+                'plimit': 'max',
+                'exintro': 1,
+                'explaintext': 1,
+                'exsentences': 1,
+                'exlimit': 'max',
+                'gsrlimit': 10,
+                'callback': '?',
+                'gsrsearch': encodeURIComponent(data)
+            });
+
             var result = $.ajax({
-                    url: "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=pageimages|extracts&generator=search&plimit=max&exintro&explaintext&exsentences=1&exlimit=max&gsrlimit=10&callback=?&gsrsearch=" + encodeURIComponent(txt),
+                    url: url,
                     type: "GET",
-//                    data: data,
-                    dataType: 'jsonp',
+                    dataType: 'jsonp'
                 })
 
                 /* if the call is successful (status 200 OK) show results */

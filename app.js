@@ -185,6 +185,98 @@ function getPoliticianName(politicianNameDetails) {
     //    })
 };
 
+function callTimesApi(politicianNameDetails) {
+    var data = politicianNameDetails;
+
+    var url = 'https://api.nytimes.com/svc/search/v2/articlesearch.json';
+    url += '?' + $.param({
+        'api-key': '048e67fe7fe94ffb92aa6a58646dc462',
+        'q': data,
+        'fq': 'congress',
+    });
+
+    var resultTimes = $.ajax({
+
+            url: url,
+            method: 'GET',
+        })
+        /* if the call is successful (status 200 OK) show results */
+        .done(function (resultTimes) {
+            /* if the results are meeningful, we can just console.log them */
+            console.log(resultTimes);
+            showTimesArticle(resultTimes);
+        })
+        /* if the call is NOT successful show errors */
+        .fail(function (jqXHR, error, errorThrown) {
+            console.log(jqXHR);
+            console.log(error);
+            console.log(errorThrown);
+        });
+
+}
+
+function callWikiApi(politicianNameDetails) {
+    var txt = politicianNameDetails;
+    var result = $.ajax({
+            url: "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=pageimages|extracts&generator=search&exintro&explaintext&exsentences=1&exlimit=max&gsrlimit=10&callback=?&gsrsearch=" + encodeURIComponent(txt),
+            type: "GET",
+            //                    data: data,
+            dataType: 'jsonp',
+        })
+
+        /* if the call is successful (status 200 OK) show results */
+        .done(function (result) {
+            /* if the results are meeningful, we can just console.log them */
+            console.log(result);
+
+            // show in html
+
+        })
+        /* if the call is NOT successful show errors */
+        .fail(function (jqXHR, error, errorThrown) {
+            console.log(jqXHR);
+            console.log(error);
+
+            console.log(errorThrown);
+        });
+};
+
+// diplay wiki article
+function showWikiArticle(wikiArray) {
+    // pages.title == politicianNameDetails
+
+
+}
+
+// display times articles
+function showTimesArticle(timesArray) {
+
+    //store article info in a variable:
+    let buildNyTimesOutput = '';
+
+    $.each(timesArray.response.docs, function (timesArrayKey, timesArrayValue) {
+
+        buildNyTimesOutput += `<article class="col-4">`;
+        buildNyTimesOutput += `<h4><a href="${timesArrayValue.web_url}" target="_blank">${timesArrayValue.headline.main}</a></h4>`;
+        buildNyTimesOutput += `<p>${timesArrayValue.snippet}</p>`;
+        buildNyTimesOutput += `</article>`;
+
+    })
+
+    console.log(buildNyTimesOutput);
+
+    $('#news-section').html(buildNyTimesOutput);
+    //            <
+    //            article class = "col-4" >
+    //            <
+    //            h4 > Title of Article 1 < /h4> <
+    //        p > Text of article 1. "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." < /p> < /
+    //        article >
+}
+// response.docs -> pull up first 3 articles
+
+
+
 
 /******************************
 FUNCTION USAGE
@@ -218,6 +310,11 @@ $(document).ready(function () {
         $("#results-section").show();
 
         getPoliticianName(politicianNameDetails);
+        // Call Wiki API with politician name
+
+        callTimesApi(politicianNameDetails);
+        callWikiApi(politicianNameDetails);
+
     }
 
     // On change #state-submit activate getStateInput() function
@@ -236,6 +333,7 @@ $(document).ready(function () {
         $("#results-section").hide();
         $("#state-form").hide();
         $("#list-names").show();
+
 
     })
 

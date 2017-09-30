@@ -8,13 +8,19 @@
     <script type="text/javascript">
         $(document).ready(function() {
 
+            var data = 'romney'
+
+            var url = 'https://api.nytimes.com/svc/search/v2/articlesearch.json';
+            url += '?' + $.param({
+                'api-key': '048e67fe7fe94ffb92aa6a58646dc462',
+                'q': data,
+                'fq': 'congress',
+            });
 
             var result = $.ajax({
 
-                    url: "https://api.nytimes.com/svc/search/v2/articlesearch.json?fq=romney&facet_field=day_of_week&begin_date=20120101&end_date=20120101&api-key=048e67fe7fe94ffb92aa6a58646dc462",
-                    type: "GET",
-                    dataType: 'json',
-                    //                    headers: { // 'X-API-Key': '048e67fe7fe94ffb92aa6a58646dc462' // }
+                    url: url,
+                    method: 'GET',
                 })
                 /* if the call is successful (status 200 OK) show results */
                 .done(function(result) {
@@ -28,6 +34,7 @@
                     console.log(error);
                     console.log(errorThrown);
                 });
+
         });
 
     </script>
