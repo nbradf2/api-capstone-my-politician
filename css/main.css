@@ -205,11 +205,16 @@ main section #contact-info {
 /** News & Wiki **/
 
 main section article {
-    height: 13rem;
+    height: 18rem;
     padding-top: 1rem;
     margin-top: .5rem;
     box-shadow: 2px 1px 3px #ecd688;
+    overflow-x: auto;
 }
 
+main section article h4 {
+    height: 5rem;
+    margin-bottom: 1rem;
+}
 
 /** Wiki **/

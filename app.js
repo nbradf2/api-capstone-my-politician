@@ -101,7 +101,7 @@ function getProPublicaHouse(userState) {
         })
         /* if the call is successful (status 200 OK) show results */
         .done(function (resultHouse) {
-            /* if the results are meeningful, we can just console.log them */
+            /* if the results are meaningful, we can just console.log them */
             console.log(resultHouse);
 
             displayHouseResults(resultHouse);
@@ -143,7 +143,7 @@ function getProPublicaSenate(userState) {
         })
         /* if the call is successful (status 200 OK) show results */
         .done(function (resultSenate) {
-            /* if the results are meeningful, we can just console.log them */
+            /* if the results are meaningful, we can just console.log them */
             console.log(resultSenate);
 
             displaySenateResults(resultSenate);
@@ -192,8 +192,9 @@ function callTimesApi(politicianNameDetails) {
     url += '?' + $.param({
         'api-key': '048e67fe7fe94ffb92aa6a58646dc462',
         'q': data,
-        'fq': 'congress',
+        //        'fq': 'congress',
     });
+
 
     var resultTimes = $.ajax({
 
@@ -202,7 +203,7 @@ function callTimesApi(politicianNameDetails) {
         })
         /* if the call is successful (status 200 OK) show results */
         .done(function (resultTimes) {
-            /* if the results are meeningful, we can just console.log them */
+            /* if the results are meaningful, we can just console.log them */
             console.log(resultTimes);
             showTimesArticle(resultTimes);
         })
@@ -215,9 +216,42 @@ function callTimesApi(politicianNameDetails) {
 
 }
 
+
+// display times articles
+function showTimesArticle(timesArray) {
+
+
+    //    console.log(timesArray);
+
+    // get first 3 items of timesArray
+
+    //store article info in a variable:
+
+
+    let firstThree = timesArray.response.docs.slice(0, 3);
+    //    console.log(firstThree);
+
+    $.each(firstThree, function (timesArrayKey, timesArrayValue) {
+
+        let buildNyTimesOutput = '';
+
+        buildNyTimesOutput += `<article class="col-4">`;
+        buildNyTimesOutput += `<h4><a href="${timesArrayValue.web_url}" target="_blank">${timesArrayValue.headline.main}</a></h4>`;
+        buildNyTimesOutput += `<img href="${timesArrayValue.multimedia}">`
+        buildNyTimesOutput += `<p>${timesArrayValue.snippet}</p>`;
+        buildNyTimesOutput += `</article>`;
+
+        //show in html
+
+        $('#news-section').append(buildNyTimesOutput);
+
+    });
+
+};
+
 function callWikiApi(politicianNameDetails) {
     var txt = politicianNameDetails;
-    var result = $.ajax({
+    var resultWiki = $.ajax({
             url: "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=pageimages|extracts&generator=search&exintro&explaintext&exsentences=1&exlimit=max&gsrlimit=10&callback=?&gsrsearch=" + encodeURIComponent(txt),
             type: "GET",
             //                    data: data,
@@ -225,12 +259,12 @@ function callWikiApi(politicianNameDetails) {
         })
 
         /* if the call is successful (status 200 OK) show results */
-        .done(function (result) {
-            /* if the results are meeningful, we can just console.log them */
-            console.log(result);
+        .done(function (resultWiki) {
+            /* if the results are meaningful, we can just console.log them */
+            console.log(resultWiki);
 
             // show in html
-
+            showWikiArticle(resultWiki);
         })
         /* if the call is NOT successful show errors */
         .fail(function (jqXHR, error, errorThrown) {
@@ -241,39 +275,71 @@ function callWikiApi(politicianNameDetails) {
         });
 };
 
+function getAreaMetaInfo_Wikipedia(page_id) {
+    $.ajax({
+        url: 'http://en.wikipedia.org/w/api.php',
+        data: {
+            action: 'query',
+            pageids: page_id,
+            format: 'json'
+        },
+        dataType: 'jsonp',
+        success: function (data) {
+
+            title = data.query.pages[page_id].title.replace(' ', '_');
+            $.ajax({
+                url: 'http://en.wikipedia.org/w/api.php',
+                data: {
+                    action: 'parse',
+                    prop: 'text',
+                    page: title,
+                    format: 'json'
+                },
+                dataType: 'jsonp',
+                success: function (data) {
+                    console.log(data);
+                    wikipage = $("<div>" + data.parse.text['*'] + "</div>").children().children('p');
+                    console.log(data.parse.text['*']);
+                    wikipage.find('sup').remove();
+                    wikipage.find('a').each(function () {
+                        $(this)
+                            .attr('href', 'http://en.wikipedia.org' + $(this).attr('href'))
+                            .attr('target', 'wikipedia');
+                    });
+
+                    $("#wiki_container").append(wikipage);
+                    //                    $("#wiki_container").append("<a href='http://en.wikipedia.org/wiki/" + title + "' target='wikipedia'>Read more on Wikipedia</a>");
+                }
+            });
+        }
+    });
+}
+
 // diplay wiki article
 function showWikiArticle(wikiArray) {
+
+    let buildWikiOutput = '';
+
     // pages.title == politicianNameDetails
 
+    $.each(wikiArray.query.pages, function (wikiArrayKey, wikiArrayValue) {
 
+        if (wikiArrayValue.title == politicianNameDetails) {
+
+            buildWikiOutput += `<article>`;
+            buildWikiOutput += `<h4><a href="https://en.wikipedia.org/?curid=${wikiArrayValue.pageid}" target="_blank">${wikiArrayValue.title}</a></h4>`;
+            buildWikiOutput += `<p>${wikiArrayValue.extract}</p>`
+
+            // show in html
+            $('#wiki-section').append(buildWikiOutput);
+
+            getAreaMetaInfo_Wikipedia(wikiArrayValue.pageid);
+        }
+    });
 }
 
-// display times articles
-function showTimesArticle(timesArray) {
 
-    //store article info in a variable:
-    let buildNyTimesOutput = '';
 
-    $.each(timesArray.response.docs, function (timesArrayKey, timesArrayValue) {
-
-        buildNyTimesOutput += `<article class="col-4">`;
-        buildNyTimesOutput += `<h4><a href="${timesArrayValue.web_url}" target="_blank">${timesArrayValue.headline.main}</a></h4>`;
-        buildNyTimesOutput += `<p>${timesArrayValue.snippet}</p>`;
-        buildNyTimesOutput += `</article>`;
-
-    })
-
-    console.log(buildNyTimesOutput);
-
-    $('#news-section').html(buildNyTimesOutput);
-    //            <
-    //            article class = "col-4" >
-    //            <
-    //            h4 > Title of Article 1 < /h4> <
-    //        p > Text of article 1. "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." < /p> < /
-    //        article >
-}
-// response.docs -> pull up first 3 articles
 
 
 
@@ -335,7 +401,7 @@ $(document).ready(function () {
         $("#list-names").show();
 
 
-    })
+    });
 
     // # LIST-NAMES
 
