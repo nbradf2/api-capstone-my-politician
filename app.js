@@ -4,6 +4,7 @@
 
 let userState = '';
 let politicianId = '';
+let politicianName = '';
 
 /******************************
  FUNCTION DEFINITIONS
@@ -152,7 +153,6 @@ function getProPublicaSenate(userState) {
         });
 };
 
-
 function displaySenateResults(senateArray) {
 
     let buildSenateMembers = "";
@@ -185,8 +185,6 @@ function getIndividualPolitician(politicianId) {
             console.log(resultIndividualPolitician);
 
             displayIndividualResults(resultIndividualPolitician);
-            //            displayPoliticianContactInfo(resultIndividualPolitician);
-            //            displaySenateResults(resultIndividualPolitician);
         })
         /* if the call is NOT successful show errors */
         .fail(function (jqXHR, error, errorThrown) {
@@ -196,17 +194,22 @@ function getIndividualPolitician(politicianId) {
         });
 };
 
-
-// START HERE
 // Display results of individual politician call
 function displayIndividualResults(individualArray) {
 
     $.each(individualArray.results, function (individualArrayKey, individualArrayValue) {
 
-        // Politician name - heading
-        $('#pol-name').append(`${individualArrayValue.first_name} ${individualArrayValue.last_name}`);
+        // store name in variable
+        politicianName = `${individualArrayValue.first_name} ${individualArrayValue.last_name}`
 
-        // Party
+        console.log(politicianName);
+
+        // Politician name - heading
+        $('#pol-name').append(`${politicianName}`);
+
+        // Image
+        $('#pol-image').append(`<img src="https://theunitedstates.io/images/congress/225x275/${politicianId}.jpg" alt="Image of ${individualArrayValue.first_name} ${individualArrayValue.last_name}">`)
+
         if (individualArrayValue.current_party === "D") {
             $('#party').append('Democrat');
         }
@@ -218,50 +221,11 @@ function displayIndividualResults(individualArray) {
         }
 
         // Contact Info
-        $('#contact-info').append(`<p>Facebook:  <a href="https://www.facebook.com/${individualArrayValue.facebook_account}/">${individualArrayValue.facebook_account}</a></p>`);
+        $('#contact-info').append(`<p>Facebook:  <a href="https://www.facebook.com/${individualArrayValue.facebook_account}/" target="_blank">${individualArrayValue.facebook_account}</a></p>`);
 
-        $('#contact-info').append(`<p>Twitter:  <a href="https://www.facebook.com/${individualArrayValue.twitter_account}/">${individualArrayValue.twitter_account}</a></p>`)
+        $('#contact-info').append(`<p>Twitter:  <a href="https://www.twitter.com/${individualArrayValue.twitter_account}?lang=en" target="_blank">${individualArrayValue.twitter_account}</a></p>`)
     });
-
-
-
-
-    //    // display selected politician's name
-    //    let buildPoliticianName = "";
-    //
-    //    $.each(individualArray.results, function (individualArrayKey, individualArrayValue) {
-    //        buildPoliticianName +=
-    //            `<h2 id="pol-name">${individualArrayValue.first_name} ${individualArrayValue.last_name}</h2>`
-    //
-    //        //show in HTML
-    //        $('#info-section').html(buildPoliticianName);
-    //    });
 }
-
-// Display Politician's contact info
-//
-//function displayPoliticianContactInfo(individualArray) {
-//    // display politician's contact info
-//    let buildPoliticianContact = '';
-//
-//    $.each(individualArray.results, function (individualArrayKey, individualArrayValue) {
-//        buildPoliticianContact +=
-//            `<h3>Contact Info</h3>`;
-//        buildPoliticianContact +=
-//            `<p>Facebook: <a href="https://www.facebook.com/${individualArrayValue.facebook_account}/">${individualArrayValue.facebook_account}</a></p>`
-//
-//            <
-//            //
-//            //            p > < a href = "#" > Twitter < /a></p >
-//            //            <
-//            //
-//            //            /div>
-//
-//            //show in HTML
-//            $('#contact-info').append(buildPoliticianContact);
-//    })
-//}
-
 
 
 /******************************
@@ -297,7 +261,6 @@ $(document).ready(function () {
         // CALL RESULTS FUNCTIONS HERE
         // Call ProPublica API for individual call
         getIndividualPolitician(politicianId);
-
     }
 
     // On click #state-submit activate getStateInput() function and show #list-names section
