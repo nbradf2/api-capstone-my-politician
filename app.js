@@ -225,7 +225,65 @@ function displayIndividualResults(individualArray) {
 
         $('#contact-info').append(`<p>Twitter:  <a href="https://www.twitter.com/${individualArrayValue.twitter_account}?lang=en" target="_blank">${individualArrayValue.twitter_account}</a></p>`)
     });
+
+    // Call NY Times API
+
+    function getTimesArticles(politicianName) {
+
+        var url = 'https://api.nytimes.com/svc/search/v2/articlesearch.json';
+        url += '?' + $.param({
+            'api-key': '048e67fe7fe94ffb92aa6a58646dc462',
+            'q': politicianName,
+            //        'fq': 'congress',
+        });
+
+        var timesResult = $.ajax({
+
+                url: url,
+                method: 'GET',
+            })
+            /* if the call is successful (status 200 OK) show results */
+            .done(function (timesResult) {
+                /* if the results are meeningful, we can just console.log them */
+                console.log(timesResult);
+
+                displayTimesArticle(timesResult);
+
+            })
+            /* if the call is NOT successful show errors */
+            .fail(function (jqXHR, error, errorThrown) {
+                console.log(jqXHR);
+                console.log(error);
+                console.log(errorThrown);
+            });
+    }
+
+    // display times articles
+
+    function displayTimesArticle(timesArray) {
+
+        let firstThree = timesArray.response.docs.slice(0, 3);
+        //    console.log(firstThree);
+
+        $.each(firstThree, function (timesArrayKey, timesArrayValue) {
+
+            let buildNyTimesOutput = '';
+
+            buildNyTimesOutput += `<article class="col-4">`;
+            buildNyTimesOutput += `<h4><a href="${timesArrayValue.web_url}" target="_blank">${timesArrayValue.headline.main}</a></h4>`;
+            buildNyTimesOutput += `<img href="${timesArrayValue.multimedia.subtype}">`;
+            buildNyTimesOutput += `<p>${timesArrayValue.snippet}</p>`;
+            buildNyTimesOutput += `</article>`;
+
+            //show in html
+
+            $('#news-section').append(buildNyTimesOutput);
+
+        });
+    }
+    getTimesArticles(politicianName);
 }
+
 
 
 /******************************
@@ -261,6 +319,7 @@ $(document).ready(function () {
         // CALL RESULTS FUNCTIONS HERE
         // Call ProPublica API for individual call
         getIndividualPolitician(politicianId);
+        //        getTimesArticles(politicianName);
     }
 
     // On click #state-submit activate getStateInput() function and show #list-names section
