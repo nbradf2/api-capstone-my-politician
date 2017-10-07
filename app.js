@@ -205,7 +205,7 @@ function displayIndividualResults(individualArray) {
         console.log(politicianName);
 
         // Politician name - heading
-        $('#pol-name').append(`${politicianName}`);
+        $('#pol-name').append(`<a href="${individualArrayValue.url}" target="_blank">${politicianName}</a>`);
 
         // Image
         $('#pol-image').append(`<img src="https://theunitedstates.io/images/congress/225x275/${politicianId}.jpg" alt="Image of ${individualArrayValue.first_name} ${individualArrayValue.last_name}">`)
@@ -221,20 +221,77 @@ function displayIndividualResults(individualArray) {
         }
 
         // Contact Info
-        $('#contact-info').append(`<p>Facebook:  <a href="https://www.facebook.com/${individualArrayValue.facebook_account}/" target="_blank">${individualArrayValue.facebook_account}</a></p>`);
 
-        $('#contact-info').append(`<p>Twitter:  <a href="https://www.twitter.com/${individualArrayValue.twitter_account}?lang=en" target="_blank">${individualArrayValue.twitter_account}</a></p>`)
+        $('#contact-info').append(
+            `
+            <p>Phone: ${individualArrayValue.roles[0].phone}</p>
+            <p>Office: ${individualArrayValue.roles[0].office}, Washington, DC 20515</p>
+            <p>Facebook:  <a href="https://www.facebook.com/${individualArrayValue.facebook_account}/" target="_blank">${individualArrayValue.facebook_account}</a></p>
+            <p>Twitter:  <a href="https://www.twitter.com/${individualArrayValue.twitter_account}?lang=en" target="_blank">${individualArrayValue.twitter_account}</a></p>
+
+
+        `);
     });
 
-    // Call NY Times API
+    // Call Wiki API
+    function getWikiApi(politicianName) {
+        //        var txt = politicianName;
+        var resultWiki = $.ajax({
+                url: `https://en.wikipedia.org/w/api.php?action=query&format=json&prop=pageimages|extracts&generator=search&exintro&explaintext&exsentences=1&exlimit=max&gsrlimit=10&callback=?&gsrsearch=${politicianName}`,
+                type: "GET",
+                //                    data: data,
+                dataType: 'jsonp',
+            })
 
+            /* if the call is successful (status 200 OK) show results */
+            .done(function (resultWiki) {
+                /* if the results are meaningful, we can just console.log them */
+                console.log(resultWiki);
+
+                // show in html
+                displayWikiArticle(resultWiki);
+            })
+            /* if the call is NOT successful show errors */
+            .fail(function (jqXHR, error, errorThrown) {
+                console.log(jqXHR);
+                console.log(error);
+
+                console.log(errorThrown);
+            });
+    };
+
+    // Display Wiki API
+
+    function displayWikiArticle(wikiArray) {
+
+        let buildWikiOutput = '';
+
+        // pages.title == politicianNameDetails
+
+        $.each(wikiArray.query.pages, function (wikiArrayKey, wikiArrayValue) {
+
+            if (wikiArrayValue.title == politicianName) {
+
+                buildWikiOutput += `<article>`;
+                buildWikiOutput += `<p>${wikiArrayValue.extract}</p>`
+                buildWikiOutput += `<h5><a href="https://en.wikipedia.org/?curid=${wikiArrayValue.pageid}" target="_blank">See more on Wikipedia</a></h5>`
+                buildWikiOutput += `</article>`
+
+                // show in html
+                $('#contact-info').append(buildWikiOutput);
+
+
+            }
+        });
+    }
+
+    // Call NY Times API
     function getTimesArticles(politicianName) {
 
         var url = 'https://api.nytimes.com/svc/search/v2/articlesearch.json';
         url += '?' + $.param({
             'api-key': '048e67fe7fe94ffb92aa6a58646dc462',
             'q': politicianName,
-            //        'fq': 'congress',
         });
 
         var timesResult = $.ajax({
@@ -281,6 +338,7 @@ function displayIndividualResults(individualArray) {
 
         });
     }
+    getWikiApi(politicianName);
     getTimesArticles(politicianName);
 }
 
