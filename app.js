@@ -185,6 +185,7 @@ function getIndividualPolitician(politicianId) {
             console.log(resultIndividualPolitician);
 
             displayIndividualResults(resultIndividualPolitician);
+            //            displayPoliticianContactInfo(resultIndividualPolitician);
             //            displaySenateResults(resultIndividualPolitician);
         })
         /* if the call is NOT successful show errors */
@@ -200,17 +201,66 @@ function getIndividualPolitician(politicianId) {
 // Display results of individual politician call
 function displayIndividualResults(individualArray) {
 
-    // display selected politician's name
-    let buildPoliticianName = "";
-
     $.each(individualArray.results, function (individualArrayKey, individualArrayValue) {
-        buildPoliticianName +=
-            `<h2 id="pol-name">${individualArrayValue.first_name} ${individualArrayValue.last_name}</h2>`
 
-        //show in HTML
-        $('#info-section').html(buildPoliticianName)
-    })
+        // Politician name - heading
+        $('#pol-name').append(`${individualArrayValue.first_name} ${individualArrayValue.last_name}`);
+
+        // Party
+        if (individualArrayValue.current_party === "D") {
+            $('#party').append('Democrat');
+        }
+        if (individualArrayValue.current_party === "R") {
+            $('#party').append('Republican');
+        }
+        if (individualArrayValue.current_party === "I") {
+            $('#party').append('Independent');
+        }
+
+        // Contact Info
+        $('#contact-info').append(`<p>Facebook:  <a href="https://www.facebook.com/${individualArrayValue.facebook_account}/">${individualArrayValue.facebook_account}</a></p>`);
+
+        $('#contact-info').append(`<p>Twitter:  <a href="https://www.facebook.com/${individualArrayValue.twitter_account}/">${individualArrayValue.twitter_account}</a></p>`)
+    });
+
+
+
+
+    //    // display selected politician's name
+    //    let buildPoliticianName = "";
+    //
+    //    $.each(individualArray.results, function (individualArrayKey, individualArrayValue) {
+    //        buildPoliticianName +=
+    //            `<h2 id="pol-name">${individualArrayValue.first_name} ${individualArrayValue.last_name}</h2>`
+    //
+    //        //show in HTML
+    //        $('#info-section').html(buildPoliticianName);
+    //    });
 }
+
+// Display Politician's contact info
+//
+//function displayPoliticianContactInfo(individualArray) {
+//    // display politician's contact info
+//    let buildPoliticianContact = '';
+//
+//    $.each(individualArray.results, function (individualArrayKey, individualArrayValue) {
+//        buildPoliticianContact +=
+//            `<h3>Contact Info</h3>`;
+//        buildPoliticianContact +=
+//            `<p>Facebook: <a href="https://www.facebook.com/${individualArrayValue.facebook_account}/">${individualArrayValue.facebook_account}</a></p>`
+//
+//            <
+//            //
+//            //            p > < a href = "#" > Twitter < /a></p >
+//            //            <
+//            //
+//            //            /div>
+//
+//            //show in HTML
+//            $('#contact-info').append(buildPoliticianContact);
+//    })
+//}
 
 
 
