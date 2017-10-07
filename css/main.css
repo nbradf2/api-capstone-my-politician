@@ -50,6 +50,7 @@ a {
 
 a:hover {
     font-weight: 700;
+    color: #a58c32;
 }
 
 a:visited {
@@ -194,7 +195,7 @@ main section #party {
 }
 
 main section #contact-info {
-    height: 15rem;
+    max-height: 25rem;
     margin-left: 1rem;
     margin-top: .4rem;
     box-shadow: 0;
@@ -205,7 +206,7 @@ main section #contact-info {
 /** News & Wiki **/
 
 main section article {
-    height: 19rem;
+    max-height: 25rem;
     padding-top: 1rem;
     margin-top: .5rem;
     /*    box-shadow: 2px 1px 3px #ecd688;*/
