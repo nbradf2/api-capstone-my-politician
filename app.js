@@ -3,9 +3,7 @@
  *****************************/
 
 let userState = '';
-let politicianName = '';
-let facebookName = '';
-let twitterName = '';
+let politicianId = '';
 
 /******************************
  FUNCTION DEFINITIONS
@@ -24,7 +22,7 @@ function getStateInput() {
 
 };
 
-var politicianNameDetails = "";
+// Set url to id of selected name with politicianId variable
 
 function getAllUrlParams(url) {
 
@@ -84,14 +82,14 @@ function getAllUrlParams(url) {
     return obj;
 }
 
-
-
 // get ProPublica API (House):
+
 function getProPublicaHouse(userState) {
 
+    // House
+
     var resultHouse = $.ajax({
-            /* https://projects.propublica.org/api-docs/congress-api/members/#get-current-members-by-statedistrict*/
-            //url: "https://api.propublica.org/congress/v1/members/senate/IL/current.json",
+
             url: `https://api.propublica.org/congress/v1/members/house/${userState}/current.json`,
             type: "GET",
             dataType: 'json',
@@ -101,7 +99,7 @@ function getProPublicaHouse(userState) {
         })
         /* if the call is successful (status 200 OK) show results */
         .done(function (resultHouse) {
-            /* if the results are meaningful, we can just console.log them */
+            /* if the results are meeningful, we can just console.log them */
             console.log(resultHouse);
 
             displayHouseResults(resultHouse);
@@ -114,26 +112,24 @@ function getProPublicaHouse(userState) {
         });
 };
 
-// Build list of House members
 function displayHouseResults(houseArray) {
 
     let buildHouseMembers = "";
 
     $.each(houseArray.results, function (houseArrayKey, houseArrayValue) {
         buildHouseMembers +=
-            `<li><a href="/?name=${encodeURI(houseArrayValue.name)}">${houseArrayValue.name}</a></li>`
+            `<li><a href="/?id=${encodeURI(houseArrayValue.id)}">${houseArrayValue.name}</a></li>`
 
         //show in HTML
         $('#house ul').html(buildHouseMembers)
     })
 }
 
-// get ProPublica API (Senate):
+// Senate
 function getProPublicaSenate(userState) {
 
     var resultSenate = $.ajax({
-            /* https://projects.propublica.org/api-docs/congress-api/members/#get-current-members-by-statedistrict*/
-            //url: "https://api.propublica.org/congress/v1/members/senate/IL/current.json",
+
             url: `https://api.propublica.org/congress/v1/members/senate/${userState}/current.json`,
             type: "GET",
             dataType: 'json',
@@ -143,7 +139,7 @@ function getProPublicaSenate(userState) {
         })
         /* if the call is successful (status 200 OK) show results */
         .done(function (resultSenate) {
-            /* if the results are meaningful, we can just console.log them */
+            /* if the results are meeningful, we can just console.log them */
             console.log(resultSenate);
 
             displaySenateResults(resultSenate);
@@ -156,191 +152,65 @@ function getProPublicaSenate(userState) {
         });
 };
 
-// Build list of Senate members
+
 function displaySenateResults(senateArray) {
 
     let buildSenateMembers = "";
 
     $.each(senateArray.results, function (senateArrayKey, senateArrayValue) {
         buildSenateMembers +=
-            `<li><a href="/?name=${encodeURI(senateArrayValue.name)}">${senateArrayValue.name}</a></li>`
+            `<li><a href="/?id=${encodeURI(senateArrayValue.id)}">${senateArrayValue.name}</a></li>`
 
         //show in HTML
         $('#senate ul').html(buildSenateMembers)
     })
 }
 
-// Get name of person clicked on
+// Call ProPublica API for individual members using politicianId variable
 
-function getPoliticianName(politicianNameDetails) {
+function getIndividualPolitician(politicianId) {
 
-    $("#info-section h2").text(politicianNameDetails);
-    //    $('#senate-members').on('click', function {
-    //        politicianName =
-    //            '<h2 id="pol-name">' + senateArrayValue.name + '</h2>';
-    //        console.log(politicianName);
-    //
-    //        // show in HTML
-    //        $('#pol-name').html(politicianName);
-    //    })
-};
+    var resultIndividualPolitician = $.ajax({
 
-function callTimesApi(politicianNameDetails) {
-    var data = politicianNameDetails;
-
-    var url = 'https://api.nytimes.com/svc/search/v2/articlesearch.json';
-    url += '?' + $.param({
-        'api-key': '048e67fe7fe94ffb92aa6a58646dc462',
-        'q': data,
-        //        'fq': 'congress',
-    });
-
-
-    var resultTimes = $.ajax({
-
-            url: url,
-            method: 'GET',
-        })
-        /* if the call is successful (status 200 OK) show results */
-        .done(function (resultTimes) {
-            /* if the results are meaningful, we can just console.log them */
-            console.log(resultTimes);
-            showTimesArticle(resultTimes);
-        })
-        /* if the call is NOT successful show errors */
-        .fail(function (jqXHR, error, errorThrown) {
-            console.log(jqXHR);
-            console.log(error);
-            console.log(errorThrown);
-        });
-
-}
-
-
-// display times articles
-function showTimesArticle(timesArray) {
-
-
-    //    console.log(timesArray);
-
-    // get first 3 items of timesArray
-
-    //store article info in a variable:
-
-
-    let firstThree = timesArray.response.docs.slice(0, 3);
-    //    console.log(firstThree);
-
-    $.each(firstThree, function (timesArrayKey, timesArrayValue) {
-
-        let buildNyTimesOutput = '';
-
-        buildNyTimesOutput += `<article class="col-4">`;
-        buildNyTimesOutput += `<h4><a href="${timesArrayValue.web_url}" target="_blank">${timesArrayValue.headline.main}</a></h4>`;
-        buildNyTimesOutput += `<img href="${timesArrayValue.multimedia}">`
-        buildNyTimesOutput += `<p>${timesArrayValue.snippet}</p>`;
-        buildNyTimesOutput += `</article>`;
-
-        //show in html
-
-        $('#news-section').append(buildNyTimesOutput);
-
-    });
-
-};
-
-function callWikiApi(politicianNameDetails) {
-    var txt = politicianNameDetails;
-    var resultWiki = $.ajax({
-            url: "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=pageimages|extracts&generator=search&exintro&explaintext&exsentences=1&exlimit=max&gsrlimit=10&callback=?&gsrsearch=" + encodeURIComponent(txt),
+            url: `https://api.propublica.org/congress/v1/members/${politicianId}.json`,
             type: "GET",
-            //                    data: data,
-            dataType: 'jsonp',
+            dataType: 'json',
+            headers: {
+                'X-API-Key': 'YNoO8cdS5NIhOruok98nV3s6bBzGoJCynVa97XnW'
+            }
         })
-
         /* if the call is successful (status 200 OK) show results */
-        .done(function (resultWiki) {
-            /* if the results are meaningful, we can just console.log them */
-            console.log(resultWiki);
+        .done(function (resultIndividualPolitician) {
+            /* if the results are meeningful, we can just console.log them */
+            console.log(resultIndividualPolitician);
 
-            // show in html
-            showWikiArticle(resultWiki);
+            displayIndividualResults(resultIndividualPolitician);
+            //            displaySenateResults(resultIndividualPolitician);
         })
         /* if the call is NOT successful show errors */
         .fail(function (jqXHR, error, errorThrown) {
             console.log(jqXHR);
             console.log(error);
-
             console.log(errorThrown);
         });
 };
 
-function getAreaMetaInfo_Wikipedia(page_id) {
-    $.ajax({
-        url: 'http://en.wikipedia.org/w/api.php',
-        data: {
-            action: 'query',
-            pageids: page_id,
-            format: 'json'
-        },
-        dataType: 'jsonp',
-        success: function (data) {
 
-            title = data.query.pages[page_id].title.replace(' ', '_');
-            $.ajax({
-                url: 'http://en.wikipedia.org/w/api.php',
-                data: {
-                    action: 'parse',
-                    prop: 'text',
-                    page: title,
-                    format: 'json'
-                },
-                dataType: 'jsonp',
-                success: function (data) {
-                    console.log(data);
-                    wikipage = $("<div>" + data.parse.text['*'] + "</div>").children().children('p');
-                    console.log(data.parse.text['*']);
-                    wikipage.find('sup').remove();
-                    wikipage.find('a').each(function () {
-                        $(this)
-                            .attr('href', 'http://en.wikipedia.org' + $(this).attr('href'))
-                            .attr('target', 'wikipedia');
-                    });
+// START HERE
+// Display results of individual politician call
+function displayIndividualResults(individualArray) {
 
-                    $("#wiki_container").append(wikipage);
-                    //                    $("#wiki_container").append("<a href='http://en.wikipedia.org/wiki/" + title + "' target='wikipedia'>Read more on Wikipedia</a>");
-                }
-            });
-        }
-    });
+    // display selected politician's name
+    let buildPoliticianName = "";
+
+    $.each(individualArray.results, function (individualArrayKey, individualArrayValue) {
+        buildPoliticianName +=
+            `<h2 id="pol-name">${individualArrayValue.first_name} ${individualArrayValue.last_name}</h2>`
+
+        //show in HTML
+        $('#info-section').html(buildPoliticianName)
+    })
 }
-
-// diplay wiki article
-function showWikiArticle(wikiArray) {
-
-    let buildWikiOutput = '';
-
-    // pages.title == politicianNameDetails
-
-    $.each(wikiArray.query.pages, function (wikiArrayKey, wikiArrayValue) {
-
-        if (wikiArrayValue.title == politicianNameDetails) {
-
-            buildWikiOutput += `<article>`;
-            buildWikiOutput += `<h4><a href="https://en.wikipedia.org/?curid=${wikiArrayValue.pageid}" target="_blank">${wikiArrayValue.title}</a></h4>`;
-            buildWikiOutput += `<p>${wikiArrayValue.extract}</p>`
-
-            // show in html
-            $('#wiki-section').append(buildWikiOutput);
-
-            getAreaMetaInfo_Wikipedia(wikiArrayValue.pageid);
-        }
-    });
-}
-
-
-
-
 
 
 
@@ -349,41 +219,38 @@ FUNCTION USAGE
 ******************************/
 $(document).ready(function () {
 
-
     // #STATE-FORM
 
     // At start, only show form (id: #state-form)
 
-    politicianNameDetails = decodeURI(getAllUrlParams().name);
+    politicianId = decodeURI(getAllUrlParams().id);
 
-    console.log("mame ==> ", politicianNameDetails);
+    console.log("Bioguide ID ==> ", politicianId);
     console.log("urlParams ==> ", Object.keys(getAllUrlParams()).length);
 
+    // Conditional to set #list-names if name is clicked
 
-    //no name defined
-    if ((Object.keys(getAllUrlParams()).length == 0) || (politicianNameDetails == '') || (politicianNameDetails === undefined)) {
-        console.log("name-undefined");
+    // no id defined
+    if ((Object.keys(getAllUrlParams()).length == 0) || (politicianId == '') || (politicianId === undefined)) {
+        console.log("id-undefined");
         $("#list-names").hide();
         $("#results-section").hide();
         $("#state-form").show();
-
     }
-    //name defined
+    // id defined
     else {
-        console.log("name-defined");
+        console.log("id-defined");
         $("#state-form").hide();
         $("#list-names").hide();
         $("#results-section").show();
 
-        getPoliticianName(politicianNameDetails);
-        // Call Wiki API with politician name
-
-        callTimesApi(politicianNameDetails);
-        callWikiApi(politicianNameDetails);
+        // CALL RESULTS FUNCTIONS HERE
+        // Call ProPublica API for individual call
+        getIndividualPolitician(politicianId);
 
     }
 
-    // On change #state-submit activate getStateInput() function
+    // On click #state-submit activate getStateInput() function and show #list-names section
 
     $('#my-state').on('change', function () {
         event.preventDefault();
@@ -399,22 +266,8 @@ $(document).ready(function () {
         $("#results-section").hide();
         $("#state-form").hide();
         $("#list-names").show();
-
-
     });
 
-    // # LIST-NAMES
-
-    // on click #house-members or #senate-members (this), show #results-section
-
-    //    $('#list-names').on('click', function () {
-    //
-    //        $("#state-form").hide();
-    //        $("#list-names").hide();
-    //        $("#results-section").show();
-    //
-    //        getPoliticianName();
-    //    })
 
 
 
