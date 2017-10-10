@@ -1,14 +1,14 @@
 /***** COLORS - DELETE BEFORE SUBMITTING *****/
 
 /*
-    background: 'payne's grey' (blue): #546a7b
-    lighter background: 'cadet grey': #92a0ab
-    text - smokey black: #100d10
-    section background: 'Isabelline' (white): #ff2f4eb
-    unknown: 'dark coral' (orange): cf5c36
-    unknown: 'pastel yellow': #fffd82
-    borders/input text: yellow/gold: #e2c044
-    article border: light yellow (flax): #ecd688
+background: 'payne's grey' (blue): #546a7b
+lighter background: 'cadet grey': #92a0ab
+text - smokey black: #100d10
+section background: 'Isabelline' (white): #ff2f4eb
+unknown: 'dark coral' (orange): cf5c36
+unknown: 'pastel yellow': #fffd82
+borders/input text: yellow/gold: #e2c044
+article border: light yellow (flax): #ecd688
 */
 
 /***** CSS RESET *****/
@@ -178,6 +178,22 @@ main section div ul li {
     line-height: 50px;
 }
 
+.return-link-div {
+    text-align: left;
+    text-align: right;
+    margin-right: 3rem;
+    margin-bottom: 3rem;
+}
+
+.return-link {
+    font-size: 1rem;
+    color: #e2c044;
+}
+
+.return-link:hover {
+    font-weight: 700;
+    color: #a58c32;
+}
 
 /***** SCREEN 3: RESULTS SECTION *****/
 
@@ -195,7 +211,7 @@ main section #party {
 }
 
 main section #contact-info {
-    max-height: 25rem;
+    height: 15rem;
     margin-left: 1rem;
     margin-top: .4rem;
     box-shadow: 0;
@@ -206,7 +222,7 @@ main section #contact-info {
 /** News & Wiki **/
 
 main section article {
-    max-height: 25rem;
+    height: 19rem;
     padding-top: 1rem;
     margin-top: .5rem;
     /*    box-shadow: 2px 1px 3px #ecd688;*/
