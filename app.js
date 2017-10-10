@@ -119,7 +119,7 @@ function displayHouseResults(houseArray) {
 
     $.each(houseArray.results, function (houseArrayKey, houseArrayValue) {
         buildHouseMembers +=
-            `<li><a href="/?id=${encodeURI(houseArrayValue.id)}">${houseArrayValue.name}</a></li>`
+            `<li><a href="./?id=${encodeURI(houseArrayValue.id)}">${houseArrayValue.name}</a></li>`
 
         //show in HTML
         $('#house ul').html(buildHouseMembers)
@@ -159,7 +159,7 @@ function displaySenateResults(senateArray) {
 
     $.each(senateArray.results, function (senateArrayKey, senateArrayValue) {
         buildSenateMembers +=
-            `<li><a href="/?id=${encodeURI(senateArrayValue.id)}">${senateArrayValue.name}</a></li>`
+            `<li><a href="./?id=${encodeURI(senateArrayValue.id)}">${senateArrayValue.name}</a></li>`
 
         //show in HTML
         $('#senate ul').html(buildSenateMembers)
@@ -224,13 +224,11 @@ function displayIndividualResults(individualArray) {
 
         $('#contact-info').append(
             `
-            <p>Phone: ${individualArrayValue.roles[0].phone}</p>
-            <p>Office: ${individualArrayValue.roles[0].office}, Washington, DC 20515</p>
-            <p>Facebook:  <a href="https://www.facebook.com/${individualArrayValue.facebook_account}/" target="_blank">${individualArrayValue.facebook_account}</a></p>
-            <p>Twitter:  <a href="https://www.twitter.com/${individualArrayValue.twitter_account}?lang=en" target="_blank">${individualArrayValue.twitter_account}</a></p>
-
-
-        `);
+<p>Phone: ${individualArrayValue.roles[0].phone}</p>
+<p>Office: ${individualArrayValue.roles[0].office}, Washington, DC 20515</p>
+<p>Facebook:  <a href="https://www.facebook.com/${individualArrayValue.facebook_account}/" target="_blank">${individualArrayValue.facebook_account}</a></p>
+<p>Twitter:  <a href="https://www.twitter.com/${individualArrayValue.twitter_account}?lang=en" target="_blank">${individualArrayValue.twitter_account}</a></p>
+`);
     });
 
     // Call Wiki API
@@ -365,6 +363,7 @@ $(document).ready(function () {
         console.log("id-undefined");
         $("#list-names").hide();
         $("#results-section").hide();
+        $('.return-link-div').hide();
         $("#state-form").show();
     }
     // id defined
@@ -372,6 +371,7 @@ $(document).ready(function () {
         console.log("id-defined");
         $("#state-form").hide();
         $("#list-names").hide();
+        $('.return-link-div').show();
         $("#results-section").show();
 
         // CALL RESULTS FUNCTIONS HERE
@@ -396,6 +396,7 @@ $(document).ready(function () {
         $("#results-section").hide();
         $("#state-form").hide();
         $("#list-names").show();
+        $('.return-link-div').show();
     });
 
 
