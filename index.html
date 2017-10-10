@@ -20,7 +20,6 @@
     </header>
 
     <main>
-
         <!-- SCREEN 1: INPUT STATE -->
 
         <form role="form" action="" id="state-form">
@@ -78,39 +77,25 @@
                 <option value="WV">West Virginia</option>
                 <option value="WI">Wisconsin</option>
                 <option value="WY">Wyoming</option>
-
             </select>
-
         </form>
 
         <!-- SCREEN 2: LIST POLITICIAN NAMES -->
 
         <section role="region" id="list-names" class="row">
             <h2>Who do you want to know about?</h2>
-
             <div id="house" class="col-6">
                 <h3>House Members</h3>
                 <ul id="house-members">
-                    <!--
-<li><a href="#">name 1</a></li>
-<li><a href="#">name 2</a></li>
-<li><a href="#">name 3</a></li>
-<li><a href="#">name 4</a></li>
-<li><a href="#">name 5</a></li>
-<li><a href="#">name 6</a></li>
--->
                 </ul>
             </div>
             <div id="senate" class="col-6">
                 <h3>Senate Members</h3>
                 <ul id="senate-members">
-                    <!--
-<li><a href="#">name 1</a></li>
-<li><a href="#">name 2</a></li>
--->
                 </ul>
             </div>
         </section>
+
 
         <!-- SCREEN 3: RESULTS SECTION -->
 
@@ -122,21 +107,13 @@
                 <!-- Image & Party info -->
                 <div class="row">
                     <div id="img-party" class="col-3">
-                        <div id="pol-image"></div>
-                        <!--                        <img src="http://www.fillmurray.com/200/300" alt="Image of [politician's name]" id="pol-img">-->
-                        <p id="party"></p>
+                        <div id="pol-image">
+                        </div>
+                        <p id="party">
+                        </p>
                     </div>
                     <!--            Name & Contact info-->
                     <div id="contact-info" class="col-9">
-
-<!--<div id="wiki-section"></div>-->
-                        <!--
-<h3>Contact Info</h3>
-<p><a href="#">Facebook</a></p>
-<p><a href="#">Twitter</a></p>
-<p><a href="#">Email</a></p>
-<p>Phone Number</p>
--->
                     </div>
 
                 </div>
@@ -144,34 +121,11 @@
             <!-- New York Times Section -->
             <div id="news-section" class="row">
                 <h2>IN THE NEWS</h2>
-                <!--
-<article class="col-4">
-    <h4>Title of Article 1</h4>
-    <p>Text of article 1. "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
-</article>
-<article class="col-4">
-    <h4>Title of Article 2</h4>
-    <p>Text of article 2. "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
-</article>
-<article class="col-4">
-    <h4>Title of Article 3</h4>
-    <p>Text of article 3. "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
-</article>
--->
             </div>
-            <!--
-            <div id="wiki-section" class="row">
-                <h2>WIKI INFO</h2>
--->
-            <!--
-                <article>
-                    <h3>Title</h3>
-                    <p>Info text. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"</p>
-                </article>
--->
-            <!--              <div id="wiki_container"></div>-->
-            <!--            </div>-->
         </section>
+        <div class="return-link-div row">
+            <a class="return-link" href="index.html">Choose a different state</a>
+        </div>
     </main>
     <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
     <script src="app.js "></script>

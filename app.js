@@ -363,6 +363,7 @@ $(document).ready(function () {
         console.log("id-undefined");
         $("#list-names").hide();
         $("#results-section").hide();
+        $('.return-link-div').hide();
         $("#state-form").show();
     }
     // id defined
@@ -370,6 +371,7 @@ $(document).ready(function () {
         console.log("id-defined");
         $("#state-form").hide();
         $("#list-names").hide();
+        $('.return-link-div').show();
         $("#results-section").show();
 
         // CALL RESULTS FUNCTIONS HERE
@@ -394,6 +396,7 @@ $(document).ready(function () {
         $("#results-section").hide();
         $("#state-form").hide();
         $("#list-names").show();
+        $('.return-link-div').show();
     });
 
 

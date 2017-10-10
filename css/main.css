@@ -50,6 +50,7 @@ a {
 
 a:hover {
     font-weight: 700;
+    color: #a58c32;
 }
 
 a:visited {
@@ -177,6 +178,22 @@ main section div ul li {
     line-height: 50px;
 }
 
+.return-link-div {
+    text-align: left;
+    text-align: right;
+    margin-right: 3rem;
+    margin-bottom: 3rem;
+}
+
+.return-link {
+    font-size: 1rem;
+    color: #e2c044;
+}
+
+.return-link:hover {
+    font-weight: 700;
+    color: #a58c32;
+}
 
 /***** SCREEN 3: RESULTS SECTION *****/
 
