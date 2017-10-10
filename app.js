@@ -399,7 +399,4 @@ $(document).ready(function () {
         $('.return-link-div').show();
     });
 
-
-
-
 })
