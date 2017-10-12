@@ -101,6 +101,7 @@ function getProPublicaHouse(userState) {
         /* if the call is successful (status 200 OK) show results */
         .done(function (resultHouse) {
             /* if the results are meeningful, we can just console.log them */
+
             console.log(resultHouse);
 
             displayHouseResults(resultHouse);
@@ -363,7 +364,7 @@ $(document).ready(function () {
         console.log("id-undefined");
         $("#list-names").hide();
         $("#results-section").hide();
-        $('.return-link-div').hide();
+        $(".return-link-div").hide();
         $("#state-form").show();
     }
     // id defined
@@ -371,7 +372,8 @@ $(document).ready(function () {
         console.log("id-defined");
         $("#state-form").hide();
         $("#list-names").hide();
-        $('.return-link-div').show();
+        $("#previous-page").hide();
+        $(".return-link-div").show();
         $("#results-section").show();
 
         // CALL RESULTS FUNCTIONS HERE
@@ -395,8 +397,33 @@ $(document).ready(function () {
         // show #list-names section
         $("#results-section").hide();
         $("#state-form").hide();
+        $("#previous-page").hide();
+        $(".return-link-div").show();
         $("#list-names").show();
-        $('.return-link-div').show();
+
     });
+
+    // Set Start-Over button
+
+    $("#start-over").click(function () {
+
+        $("#list-names").hide();
+        $("#results-section").hide();
+        $(".return-link-div").hide();
+        $("#state-form").show();
+
+    })
+
+    //    // Set Previous-Page Button
+    //    $("#previous-page").click(function () {
+    //
+    //        // show #list-names section
+    //        $("#results-section").hide();
+    //        $("#state-form").hide();
+    //        $("#list-names").show();
+    //        $("#previous-page").hide();
+    //        $(".return-link-div").show();
+    //
+    //    })
 
 })
