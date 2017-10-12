@@ -45,7 +45,7 @@ body {
 
 a {
     text-decoration: none;
-    color: inherit;
+    color: #100d10;
 }
 
 a:hover {
@@ -124,6 +124,11 @@ header h1 {
     font-variant: small-caps;
     letter-spacing: 2px;
     text-shadow: 3px 3px #7c6926;
+    color: #f2f4eb;
+}
+
+header a {
+    color: #f2f4eb;
 }
 
 header p {
@@ -201,8 +206,18 @@ main section img {
     margin-right: 0;
 }
 
+main section i {
+    margin-right: 1rem;
+}
+
 main section #party {
+    margin-top: -.8rem;
     text-align: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-top: 2px solid #e2c044;
+    border-bottom: 2px solid #e2c044;
 }
 
 main section #contact-info {
@@ -228,4 +243,13 @@ main section article h4 {
     height: 5rem;
 }
 
-/** Wiki **/
+main section article h5 {
+    margin-top: 1rem;
+    font-weight: 700;
+}
+
+main section .wiki-style {
+    border-top: 1px solid #e2c044;
+    padding-top: 1rem;
+
+}

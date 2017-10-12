@@ -5,6 +5,7 @@
 let userState = '';
 let politicianId = '';
 let politicianName = '';
+let politicianNameWithMiddle = '';
 
 /******************************
  FUNCTION DEFINITIONS
@@ -120,7 +121,7 @@ function displayHouseResults(houseArray) {
 
     $.each(houseArray.results, function (houseArrayKey, houseArrayValue) {
         buildHouseMembers +=
-            `<li><a href="./?id=${encodeURI(houseArrayValue.id)}">${houseArrayValue.name}</a></li>`
+            `<li><a href="./?id=${encodeURI(houseArrayValue.id)}">${houseArrayValue.name} (${houseArrayValue.party})</a></li>`
 
         //show in HTML
         $('#house ul').html(buildHouseMembers)
@@ -160,7 +161,7 @@ function displaySenateResults(senateArray) {
 
     $.each(senateArray.results, function (senateArrayKey, senateArrayValue) {
         buildSenateMembers +=
-            `<li><a href="./?id=${encodeURI(senateArrayValue.id)}">${senateArrayValue.name}</a></li>`
+            `<li><a href="./?id=${encodeURI(senateArrayValue.id)}">${senateArrayValue.name} (${senateArrayValue.party})</a></li>`
 
         //show in HTML
         $('#senate ul').html(buildSenateMembers)
@@ -201,7 +202,9 @@ function displayIndividualResults(individualArray) {
     $.each(individualArray.results, function (individualArrayKey, individualArrayValue) {
 
         // store name in variable
-        politicianName = `${individualArrayValue.first_name} ${individualArrayValue.last_name}`
+        politicianName = `${individualArrayValue.first_name} ${individualArrayValue.last_name}`;
+
+        politicianNameWithMiddle = `${individualArrayValue.first_name} ${individualArrayValue.middle_name} ${individualArrayValue.last_name}`;
 
         console.log(politicianName);
 
@@ -225,11 +228,12 @@ function displayIndividualResults(individualArray) {
 
         $('#contact-info').append(
             `
-<p>Phone: ${individualArrayValue.roles[0].phone}</p>
-<p>Office: ${individualArrayValue.roles[0].office}, Washington, DC 20515</p>
-<p>Facebook:  <a href="https://www.facebook.com/${individualArrayValue.facebook_account}/" target="_blank">${individualArrayValue.facebook_account}</a></p>
-<p>Twitter:  <a href="https://www.twitter.com/${individualArrayValue.twitter_account}?lang=en" target="_blank">${individualArrayValue.twitter_account}</a></p>
-`);
+            <p><i class = "fa fa-phone"></i>${individualArrayValue.roles[0].phone}</p>
+            <p><i class="fa fa-map-marker"></i> ${individualArrayValue.roles[0].office}, Washington, DC 20515</p>
+            <p><i class="fa fa-facebook-square"></i><a href="https://www.facebook.com/${individualArrayValue.facebook_account}/" target="_blank">${individualArrayValue.facebook_account}</a></p>
+            <p><i class="fa fa-twitter-square"></i><a href="https://www.twitter.com/${individualArrayValue.twitter_account}?lang=en" target="_blank">${individualArrayValue.twitter_account}</a></p>
+            `
+        );
     });
 
     // Call Wiki API
@@ -265,21 +269,17 @@ function displayIndividualResults(individualArray) {
 
         let buildWikiOutput = '';
 
-        // pages.title == politicianNameDetails
-
         $.each(wikiArray.query.pages, function (wikiArrayKey, wikiArrayValue) {
 
-            if (wikiArrayValue.title == politicianName) {
+            if (wikiArrayValue.title == politicianName || wikiArrayValue.title == politicianNameWithMiddle || wikiArrayValue.pageid == 361176) {
 
                 buildWikiOutput += `<article>`;
-                buildWikiOutput += `<p>${wikiArrayValue.extract}</p>`
-                buildWikiOutput += `<h5><a href="https://en.wikipedia.org/?curid=${wikiArrayValue.pageid}" target="_blank">See more on Wikipedia</a></h5>`
+                buildWikiOutput += `<p class="wiki-style">${wikiArrayValue.extract}</p>`
+                buildWikiOutput += `<h5><a href="https://en.wikipedia.org/?curid=${wikiArrayValue.pageid}" target="_blank">More on <i class="fa fa-wikipedia-w"></i></a></h5>`
                 buildWikiOutput += `</article>`
 
                 // show in html
                 $('#contact-info').append(buildWikiOutput);
-
-
             }
         });
     }
@@ -291,6 +291,7 @@ function displayIndividualResults(individualArray) {
         url += '?' + $.param({
             'api-key': '048e67fe7fe94ffb92aa6a58646dc462',
             'q': politicianName,
+            'fq':
         });
 
         var timesResult = $.ajax({
@@ -340,8 +341,6 @@ function displayIndividualResults(individualArray) {
     getWikiApi(politicianName);
     getTimesArticles(politicianName);
 }
-
-
 
 /******************************
 FUNCTION USAGE
