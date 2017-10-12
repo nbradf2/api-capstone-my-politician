@@ -88,6 +88,29 @@ main section div {
 }
 
 
+main button {
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 1.4rem;
+    width: 10rem;
+    height: 4rem;
+    margin-left: .5rem;
+    background-color: #e2c044;
+    border: 1px solid #e2c044;
+    color: #100d10;
+
+}
+
+.return-link-div {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+#previous-page:hover,
+#start-over:hover {
+    background-color: #a58c32;
+    border: 1px solid #a58c32;
+}
+
 /***** HEADER *****/
 
 header {
@@ -145,17 +168,6 @@ main form input::placeholder {
     color: #e2c044;
 }
 
-main form button {
-    font-family: 'Open Sans Condensed', sans-serif;
-    font-size: 1.5rem;
-    width: 10rem;
-    height: 4rem;
-    /*    border-radius: 5px;*/
-    margin-left: -8px;
-    background-color: #f2f4eb;
-    border: 1px solid #e2c044;
-}
-
 main form .invalid-text {
     color: #af1b3f;
     font-size: 1.5rem;
@@ -176,23 +188,6 @@ main section #house {
 main section div ul li {
     list-style: none;
     line-height: 50px;
-}
-
-.return-link-div {
-    text-align: left;
-    text-align: right;
-    margin-right: 3rem;
-    margin-bottom: 3rem;
-}
-
-.return-link {
-    font-size: 1rem;
-    color: #e2c044;
-}
-
-.return-link:hover {
-    font-weight: 700;
-    color: #a58c32;
 }
 
 /***** SCREEN 3: RESULTS SECTION *****/
