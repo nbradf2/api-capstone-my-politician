@@ -251,5 +251,10 @@ main section article h5 {
 main section .wiki-style {
     border-top: 1px solid #e2c044;
     padding-top: 1rem;
-
 }
+
+main section #news-section {
+    text-align: center;
+}
+
+main section .ny-times-banner {}

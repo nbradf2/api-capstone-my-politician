@@ -271,7 +271,14 @@ function displayIndividualResults(individualArray) {
 
         $.each(wikiArray.query.pages, function (wikiArrayKey, wikiArrayValue) {
 
-            if (wikiArrayValue.title == politicianName || wikiArrayValue.title == politicianNameWithMiddle || wikiArrayValue.pageid == 361176) {
+            if (
+                wikiArrayValue.title == politicianName ||
+                wikiArrayValue.title == politicianNameWithMiddle ||
+                wikiArrayValue.pageid == 361176 || //Bernie Sanders (VT)
+                wikiArrayValue.pageid == 43266580 || //Gary Palmer (AL)
+                wikiArrayValue.pageid == 24332024 || //Dan Sullivan (AK)
+                wikiArrayValue.pageid == 44279869 //French Hill (AK)
+            ) {
 
                 buildWikiOutput += `<article>`;
                 buildWikiOutput += `<p class="wiki-style">${wikiArrayValue.extract}</p>`
@@ -291,7 +298,7 @@ function displayIndividualResults(individualArray) {
         url += '?' + $.param({
             'api-key': '048e67fe7fe94ffb92aa6a58646dc462',
             'q': politicianName,
-            'fq':
+
         });
 
         var timesResult = $.ajax({
