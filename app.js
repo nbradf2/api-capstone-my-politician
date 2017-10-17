@@ -14,7 +14,6 @@ let politicianNameWithMiddle = '';
 // To get user input (state):
 
 function getStateInput() {
-    //    alert("getStateInput() activated!");
 
     // get value of selected state:
     userState = $('#my-state').val();
@@ -101,7 +100,7 @@ function getProPublicaHouse(userState) {
         })
         /* if the call is successful (status 200 OK) show results */
         .done(function (resultHouse) {
-            /* if the results are meeningful, we can just console.log them */
+            /* if the results are meaningful, we can just console.log them */
 
             console.log(resultHouse);
 
@@ -142,7 +141,7 @@ function getProPublicaSenate(userState) {
         })
         /* if the call is successful (status 200 OK) show results */
         .done(function (resultSenate) {
-            /* if the results are meeningful, we can just console.log them */
+            /* if the results are meaningful, we can just console.log them */
             console.log(resultSenate);
 
             displaySenateResults(resultSenate);
@@ -183,7 +182,7 @@ function getIndividualPolitician(politicianId) {
         })
         /* if the call is successful (status 200 OK) show results */
         .done(function (resultIndividualPolitician) {
-            /* if the results are meeningful, we can just console.log them */
+            /* if the results are meaningful, we can just console.log them */
             console.log(resultIndividualPolitician);
 
             displayIndividualResults(resultIndividualPolitician);
@@ -308,7 +307,7 @@ function displayIndividualResults(individualArray) {
             })
             /* if the call is successful (status 200 OK) show results */
             .done(function (timesResult) {
-                /* if the results are meeningful, we can just console.log them */
+                /* if the results are meaningful, we can just console.log them */
                 console.log(timesResult);
 
                 displayTimesArticle(timesResult);
@@ -327,13 +326,12 @@ function displayIndividualResults(individualArray) {
     function displayTimesArticle(timesArray) {
 
         let firstThree = timesArray.response.docs.slice(0, 3);
-        //    console.log(firstThree);
 
         $.each(firstThree, function (timesArrayKey, timesArrayValue) {
 
             let buildNyTimesOutput = '';
 
-            buildNyTimesOutput += `<article class="col-4">`;
+            buildNyTimesOutput += `<article class="col-4 ny-times-style">`;
             buildNyTimesOutput += `<h4><a href="${timesArrayValue.web_url}" target="_blank">${timesArrayValue.headline.main}</a></h4>`;
             buildNyTimesOutput += `<img href="${timesArrayValue.multimedia.subtype}">`;
             buildNyTimesOutput += `<p>${timesArrayValue.snippet}</p>`;
@@ -385,7 +383,6 @@ $(document).ready(function () {
         // CALL RESULTS FUNCTIONS HERE
         // Call ProPublica API for individual call
         getIndividualPolitician(politicianId);
-        //        getTimesArticles(politicianName);
     }
 
     // On click #state-submit activate getStateInput() function and show #list-names section
@@ -400,7 +397,7 @@ $(document).ready(function () {
         getProPublicaHouse(userState);
         getProPublicaSenate(userState);
 
-        // show #list-names section
+        // show# list - names section
         $("#results-section").hide();
         $("#state-form").hide();
         $("#previous-page").hide();
