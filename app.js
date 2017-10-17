@@ -5,6 +5,7 @@
 let userState = '';
 let politicianId = '';
 let politicianName = '';
+let politicianNameWithMiddle = '';
 
 /******************************
  FUNCTION DEFINITIONS
@@ -13,7 +14,6 @@ let politicianName = '';
 // To get user input (state):
 
 function getStateInput() {
-    //    alert("getStateInput() activated!");
 
     // get value of selected state:
     userState = $('#my-state').val();
@@ -100,7 +100,7 @@ function getProPublicaHouse(userState) {
         })
         /* if the call is successful (status 200 OK) show results */
         .done(function (resultHouse) {
-            /* if the results are meeningful, we can just console.log them */
+            /* if the results are meaningful, we can just console.log them */
 
             console.log(resultHouse);
 
@@ -120,7 +120,7 @@ function displayHouseResults(houseArray) {
 
     $.each(houseArray.results, function (houseArrayKey, houseArrayValue) {
         buildHouseMembers +=
-            `<li><a href="./?id=${encodeURI(houseArrayValue.id)}">${houseArrayValue.name}</a></li>`
+            `<li><a href="./?id=${encodeURI(houseArrayValue.id)}">${houseArrayValue.name} (${houseArrayValue.party})</a></li>`
 
         //show in HTML
         $('#house ul').html(buildHouseMembers)
@@ -141,7 +141,7 @@ function getProPublicaSenate(userState) {
         })
         /* if the call is successful (status 200 OK) show results */
         .done(function (resultSenate) {
-            /* if the results are meeningful, we can just console.log them */
+            /* if the results are meaningful, we can just console.log them */
             console.log(resultSenate);
 
             displaySenateResults(resultSenate);
@@ -160,7 +160,7 @@ function displaySenateResults(senateArray) {
 
     $.each(senateArray.results, function (senateArrayKey, senateArrayValue) {
         buildSenateMembers +=
-            `<li><a href="./?id=${encodeURI(senateArrayValue.id)}">${senateArrayValue.name}</a></li>`
+            `<li><a href="./?id=${encodeURI(senateArrayValue.id)}">${senateArrayValue.name} (${senateArrayValue.party})</a></li>`
 
         //show in HTML
         $('#senate ul').html(buildSenateMembers)
@@ -182,7 +182,7 @@ function getIndividualPolitician(politicianId) {
         })
         /* if the call is successful (status 200 OK) show results */
         .done(function (resultIndividualPolitician) {
-            /* if the results are meeningful, we can just console.log them */
+            /* if the results are meaningful, we can just console.log them */
             console.log(resultIndividualPolitician);
 
             displayIndividualResults(resultIndividualPolitician);
@@ -201,7 +201,9 @@ function displayIndividualResults(individualArray) {
     $.each(individualArray.results, function (individualArrayKey, individualArrayValue) {
 
         // store name in variable
-        politicianName = `${individualArrayValue.first_name} ${individualArrayValue.last_name}`
+        politicianName = `${individualArrayValue.first_name} ${individualArrayValue.last_name}`;
+
+        politicianNameWithMiddle = `${individualArrayValue.first_name} ${individualArrayValue.middle_name} ${individualArrayValue.last_name}`;
 
         console.log(politicianName);
 
@@ -225,11 +227,12 @@ function displayIndividualResults(individualArray) {
 
         $('#contact-info').append(
             `
-<p>Phone: ${individualArrayValue.roles[0].phone}</p>
-<p>Office: ${individualArrayValue.roles[0].office}, Washington, DC 20515</p>
-<p>Facebook:  <a href="https://www.facebook.com/${individualArrayValue.facebook_account}/" target="_blank">${individualArrayValue.facebook_account}</a></p>
-<p>Twitter:  <a href="https://www.twitter.com/${individualArrayValue.twitter_account}?lang=en" target="_blank">${individualArrayValue.twitter_account}</a></p>
-`);
+<p><i class = "fa fa-phone"></i>${individualArrayValue.roles[0].phone}</p>
+<p><i class="fa fa-map-marker"></i> ${individualArrayValue.roles[0].office}, Washington, DC 20515</p>
+<p><i class="fa fa-facebook-square"></i><a href="https://www.facebook.com/${individualArrayValue.facebook_account}/" target="_blank">${individualArrayValue.facebook_account}</a></p>
+<p><i class="fa fa-twitter-square"></i><a href="https://www.twitter.com/${individualArrayValue.twitter_account}?lang=en" target="_blank">${individualArrayValue.twitter_account}</a></p>
+`
+        );
     });
 
     // Call Wiki API
@@ -265,21 +268,24 @@ function displayIndividualResults(individualArray) {
 
         let buildWikiOutput = '';
 
-        // pages.title == politicianNameDetails
-
         $.each(wikiArray.query.pages, function (wikiArrayKey, wikiArrayValue) {
 
-            if (wikiArrayValue.title == politicianName) {
+            if (
+                wikiArrayValue.title == politicianName ||
+                wikiArrayValue.title == politicianNameWithMiddle ||
+                wikiArrayValue.pageid == 361176 || //Bernie Sanders (VT)
+                wikiArrayValue.pageid == 43266580 || //Gary Palmer (AL)
+                wikiArrayValue.pageid == 24332024 || //Dan Sullivan (AK)
+                wikiArrayValue.pageid == 44279869 //French Hill (AK)
+            ) {
 
                 buildWikiOutput += `<article>`;
-                buildWikiOutput += `<p>${wikiArrayValue.extract}</p>`
-                buildWikiOutput += `<h5><a href="https://en.wikipedia.org/?curid=${wikiArrayValue.pageid}" target="_blank">See more on Wikipedia</a></h5>`
+                buildWikiOutput += `<p class="wiki-style">${wikiArrayValue.extract}</p>`
+                buildWikiOutput += `<h5><a href="https://en.wikipedia.org/?curid=${wikiArrayValue.pageid}" target="_blank">More on <i class="fa fa-wikipedia-w"></i></a></h5>`
                 buildWikiOutput += `</article>`
 
                 // show in html
                 $('#contact-info').append(buildWikiOutput);
-
-
             }
         });
     }
@@ -291,6 +297,7 @@ function displayIndividualResults(individualArray) {
         url += '?' + $.param({
             'api-key': '048e67fe7fe94ffb92aa6a58646dc462',
             'q': politicianName,
+
         });
 
         var timesResult = $.ajax({
@@ -300,7 +307,7 @@ function displayIndividualResults(individualArray) {
             })
             /* if the call is successful (status 200 OK) show results */
             .done(function (timesResult) {
-                /* if the results are meeningful, we can just console.log them */
+                /* if the results are meaningful, we can just console.log them */
                 console.log(timesResult);
 
                 displayTimesArticle(timesResult);
@@ -319,13 +326,12 @@ function displayIndividualResults(individualArray) {
     function displayTimesArticle(timesArray) {
 
         let firstThree = timesArray.response.docs.slice(0, 3);
-        //    console.log(firstThree);
 
         $.each(firstThree, function (timesArrayKey, timesArrayValue) {
 
             let buildNyTimesOutput = '';
 
-            buildNyTimesOutput += `<article class="col-4">`;
+            buildNyTimesOutput += `<article class="col-4 ny-times-style">`;
             buildNyTimesOutput += `<h4><a href="${timesArrayValue.web_url}" target="_blank">${timesArrayValue.headline.main}</a></h4>`;
             buildNyTimesOutput += `<img href="${timesArrayValue.multimedia.subtype}">`;
             buildNyTimesOutput += `<p>${timesArrayValue.snippet}</p>`;
@@ -340,8 +346,6 @@ function displayIndividualResults(individualArray) {
     getWikiApi(politicianName);
     getTimesArticles(politicianName);
 }
-
-
 
 /******************************
 FUNCTION USAGE
@@ -379,7 +383,6 @@ $(document).ready(function () {
         // CALL RESULTS FUNCTIONS HERE
         // Call ProPublica API for individual call
         getIndividualPolitician(politicianId);
-        //        getTimesArticles(politicianName);
     }
 
     // On click #state-submit activate getStateInput() function and show #list-names section
@@ -394,7 +397,7 @@ $(document).ready(function () {
         getProPublicaHouse(userState);
         getProPublicaSenate(userState);
 
-        // show #list-names section
+        // show# list - names section
         $("#results-section").hide();
         $("#state-form").hide();
         $("#previous-page").hide();

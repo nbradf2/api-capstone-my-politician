@@ -1,16 +1,3 @@
-/***** COLORS - DELETE BEFORE SUBMITTING *****/
-
-/*
-background: 'payne's grey' (blue): #546a7b
-lighter background: 'cadet grey': #92a0ab
-text - smokey black: #100d10
-section background: 'Isabelline' (white): #ff2f4eb
-unknown: 'dark coral' (orange): cf5c36
-unknown: 'pastel yellow': #fffd82
-borders/input text: yellow/gold: #e2c044
-article border: light yellow (flax): #ecd688
-*/
-
 /***** CSS RESET *****/
 
 * {
@@ -45,16 +32,12 @@ body {
 
 a {
     text-decoration: none;
-    color: inherit;
+    color: #100d10;
 }
 
 a:hover {
     font-weight: 700;
     color: #a58c32;
-}
-
-a:visited {
-    /*    color: #cf5c36;*/
 }
 
 form,
@@ -124,6 +107,11 @@ header h1 {
     font-variant: small-caps;
     letter-spacing: 2px;
     text-shadow: 3px 3px #7c6926;
+    color: #f2f4eb;
+}
+
+header a {
+    color: #f2f4eb;
 }
 
 header p {
@@ -201,12 +189,22 @@ main section img {
     margin-right: 0;
 }
 
+main section i {
+    margin-right: 1rem;
+}
+
 main section #party {
+    margin-top: -.8rem;
     text-align: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-top: 2px solid #e2c044;
+    border-bottom: 2px solid #e2c044;
 }
 
 main section #contact-info {
-    height: 15rem;
+    height: 20rem;
     margin-left: 1rem;
     margin-top: .4rem;
     box-shadow: 0;
@@ -224,8 +222,56 @@ main section article {
     overflow: hidden;
 }
 
+main section .ny-times-style {
+    margin-top: 1rem;
+    border-right: 1px solid #e2c044;
+    border-left: 1px solid #e2c044;
+}
+
 main section article h4 {
     height: 5rem;
 }
 
-/** Wiki **/
+main section article h5 {
+    margin-top: 1rem;
+    font-weight: 700;
+}
+
+main section .wiki-style {
+    border-top: 1px solid #e2c044;
+    padding-top: 1rem;
+}
+
+main section #news-section {
+    text-align: center;
+}
+
+.ny-times-logo {
+    margin-top: inherit;
+}
+
+/***** MEDIA QUERIES *****/
+
+@media only screen and (max-width: 640px) {
+
+    main section #img-party {
+        margin-top: 1rem;
+        max-width: 100%;
+        text-align: center;
+    }
+
+    main section #contact-info {
+        height: auto;
+        margin-left: 1rem;
+        margin-top: .4rem;
+        padding-bottom: 0;
+        box-shadow: 0;
+        max-width: 73%;
+    }
+
+    main section .ny-times-style {
+        border-bottom: 1px solid #e2c044;
+        border-right: 0;
+        border-left: 0;
+    }
+}
