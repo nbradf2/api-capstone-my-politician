@@ -15,16 +15,20 @@ This app will help users find out who their state politicians are, what politica
 
 ## Functionality
 This app's functionality includes:
-    * Search for House Representatives by State
-    * Search for Senate Representatives by State
-    * Return information from Wikipedia and news articles from the New York Times
+<ul>
+    <li>Search for House Representatives by State</li>
+    <li>Search for Senate Representatives by State</li>
+    <li>Return information from Wikipedia and news articles from the New York Times</li>
+</ul>
 
 ## Technology
 ### Front End
-    * HTML
-    * CSS
-    * JavaScript
-    * jQuery
+<ul>
+    <li>HTML</li>
+    <li>CSS</li>
+    <li>JavaScript</li>
+    <li>jQuery</li>
+</ul>
 
 The app uses AJAX JSON calls to <a href="https://projects.propublica.org/api-docs/congress-api/">ProPublica Congress</a>, <a href="https://www.mediawiki.org/wiki/API:Main_page">Wikipedia</a>, and the <a href="http://developer.nytimes.com/">New York Times</a> to return search results.
 
@@ -33,5 +37,8 @@ This app is built to be responsive across mobile, tablet, laptop, and desktop sc
 
 ## Development
 Future updates are expected to include:
-    * Search by zipcode
-    * Include local government
+<ul>
+    <li>Searchy by zipcode</li>
+    <li>Include local government</li>
+</ul>
+
