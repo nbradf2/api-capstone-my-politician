@@ -63,7 +63,7 @@ main section h2 {
     text-align: center;
     font-size: 1.8rem;
     padding-bottom: 1rem;
-    border-bottom: 1px solid #e2c044;
+    border-bottom: 2px solid #af1b3f;
 }
 
 main section div {
@@ -77,9 +77,9 @@ main button {
     width: 10rem;
     height: 4rem;
     margin-left: .5rem;
-    background-color: #e2c044;
-    border: 1px solid #e2c044;
-    color: #100d10;
+    background-color: #af1b3f;
+    border: 1px solid #af1b3f;
+    color: #f2f4eb;
 
 }
 
@@ -120,11 +120,19 @@ header p {
     padding-bottom: 1.5rem;
     text-align: right;
     text-shadow: 3px 3px #7c6926;
-    border-top: 1px solid #e2c044;
+    border-top: 5px solid #af1b3f;
 }
 
 
 /***** SCREEN 1: INPUT STATE *****/
+
+main .headline {
+    margin-top: 3rem;
+    text-align: center;
+    color: #f2f4eb;
+    font-weight: 500;
+    font-size: 2rem;
+}
 
 main form {
     height: 20rem;
@@ -143,7 +151,7 @@ main form select {
     font-family: 'Open Sans Condensed', sans-serif;
     font-size: 1.5rem;
     /*    border-radius: 5px;*/
-    border-bottom: 1px solid #e2c044;
+    border-bottom: 2px solid #af1b3f;
     height: 4rem;
     width: 20rem;
     background-color: #f2f4eb;
@@ -153,7 +161,7 @@ main form select {
 
 main form input::placeholder {
     padding-left: .8rem;
-    color: #e2c044;
+    color: #af1b3f;
 }
 
 main form .invalid-text {
@@ -170,7 +178,7 @@ main section #senate {
 }
 
 main section #house {
-    border-right: 1px solid #e2c044;
+    border-right: 1px solid #af1b3f;
 }
 
 main section div ul li {
@@ -199,8 +207,8 @@ main section #party {
     font-size: 1.5rem;
     font-weight: 700;
     text-transform: uppercase;
-    border-top: 2px solid #e2c044;
-    border-bottom: 2px solid #e2c044;
+    border-top: 2px solid #af1b3f;
+    border-bottom: 2px solid #af1b3f;
 }
 
 main section #contact-info {
@@ -224,8 +232,8 @@ main section article {
 
 main section .ny-times-style {
     margin-top: 1rem;
-    border-right: 1px solid #e2c044;
-    border-left: 1px solid #e2c044;
+    border-right: 1px solid #af1b3f;
+    border-left: 1px solid #af1b3f;
 }
 
 main section article h4 {
@@ -238,7 +246,7 @@ main section article h5 {
 }
 
 main section .wiki-style {
-    border-top: 1px solid #e2c044;
+    border-top: 1px solid #af1b3f;
     padding-top: 1rem;
 }
 
@@ -253,6 +261,11 @@ main section #news-section {
 /***** MEDIA QUERIES *****/
 
 @media only screen and (max-width: 640px) {
+
+    main section #house {
+        border-right: 0;
+        border-bottom: 1px solid #af1b3f;
+    }
 
     main section #img-party {
         margin-top: 1rem;
@@ -270,7 +283,7 @@ main section #news-section {
     }
 
     main section .ny-times-style {
-        border-bottom: 1px solid #e2c044;
+        border-bottom: 1px solid #af1b3f;
         border-right: 0;
         border-left: 0;
     }
