@@ -260,11 +260,12 @@ main section #news-section {
 
 .ny-times-logo {
     margin-top: inherit;
+    margin-bottom: 0.5rem;
 }
 
 /***** MEDIA QUERIES *****/
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 900px) {
 
     main section #house {
         border-right: 0;
@@ -283,12 +284,16 @@ main section #news-section {
         margin-top: .4rem;
         padding-bottom: 0;
         box-shadow: 0;
-        max-width: 100%;
+        width: 100%;
     }
 
     main section .ny-times-style {
         border-bottom: 1px solid #af1b3f;
         border-right: 0;
         border-left: 0;
+    }
+
+    main section article {
+        width: 100%;
     }
 }
