@@ -257,9 +257,11 @@ $(document).ready(function () {
         $("#results-section").hide();
         $(".return-link-div").hide();
         $("#state-form").show();
+        $(".headline").show();
     } else {
         console.log("id-defined");
         $("#state-form").hide();
+        $(".headline").hide();
         $("#list-names").hide();
         $("#previous-page").hide();
         $(".return-link-div").show();
@@ -277,6 +279,7 @@ $(document).ready(function () {
 
         $("#results-section").hide();
         $("#state-form").hide();
+        $(".headline").hide();
         $("#previous-page").hide();
         $(".return-link-div").show();
         $("#list-names").show();
@@ -287,5 +290,6 @@ $(document).ready(function () {
         $("#results-section").hide();
         $(".return-link-div").hide();
         $("#state-form").show();
+        $(".headline").show();
     })
 })
