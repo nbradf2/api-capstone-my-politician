@@ -185,10 +185,10 @@ function displayIndividualResults(individualArray) {
             if (
                
                 wikiArrayValue.pageid == 361176 || //Bernie Sanders (VT)
-                wikiArrayValue.pageid == 43266580 || //Gary Palmer (AL)
-                wikiArrayValue.pageid == 24332024 || //Dan Sullivan (AK)
-                wikiArrayValue.pageid == 44279869 || //French Hill (AK)
-                 wikiArrayValue.title == politicianName ||
+                // wikiArrayValue.pageid == 43266580 || //Gary Palmer (AL)
+                // wikiArrayValue.pageid == 24332024 || //Dan Sullivan (AK)
+                // wikiArrayValue.pageid == 44279869 || //French Hill (AK)
+                wikiArrayValue.title == politicianName ||
                 wikiArrayValue.title == politicianNameWithMiddle
             ) {
 
