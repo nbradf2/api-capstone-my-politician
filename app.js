@@ -170,6 +170,7 @@ function displayIndividualResults(individualArray) {
             })
             .done(function (resultWiki) {
                 displayWikiArticle(resultWiki);
+                console.log(resultWiki);
             })
             .fail(function (jqXHR, error, errorThrown) {
                 console.log(jqXHR);
@@ -180,26 +181,25 @@ function displayIndividualResults(individualArray) {
 
     function displayWikiArticle(wikiArray) {
         let buildWikiOutput = '';
-
-        $.each(wikiArray.query.pages, function (wikiArrayKey, wikiArrayValue) {
+        let myKeys = Object.keys(wikiArray.query.pages);
+        for (let i = 0; i < myKeys.length; i++) {
             if (
-                wikiArrayValue.pageid == 361176 || //Bernie Sanders (VT)
-                wikiArrayValue.pageid == 43266580 || //Gary Palmer (AL)
-                wikiArrayValue.pageid == 24332024 || //Dan Sullivan (AK)
-                wikiArrayValue.pageid == 44279869 || //French Hill (AK)
-                wikiArrayValue.title == politicianName ||
-                wikiArrayValue.title == politicianNameWithMiddle
+                wikiArray.query.pages[myKeys[i]].pageid == 361176 || //Bernie Sanders (VT)
+                wikiArray.query.pages[myKeys[i]].title == politicianName ||
+                wikiArray.query.pages[myKeys[i]].title == politicianNameWithMiddle
             ) {
 
                 buildWikiOutput += `<article>`;
-                buildWikiOutput += `<p class="wiki-style">${wikiArrayValue.extract}</p>`
-                buildWikiOutput += `<h5><a href="https://en.wikipedia.org/?curid=${wikiArrayValue.pageid}" target="_blank">More on <i class="fa fa-wikipedia-w"></i></a></h5>`
+                buildWikiOutput += `<p class="wiki-style">${wikiArray.query.pages[myKeys[i]].extract}</p>`
+                buildWikiOutput += `<h5><a href="https://en.wikipedia.org/?curid=${wikiArray.query.pages[myKeys[i]].pageid}" target="_blank">More on <i class="fa fa-wikipedia-w"></i></a></h5>`
                 buildWikiOutput += `</article>`
 
                 // show in html
                 $('#contact-info').append(buildWikiOutput);
+
+                break;
             }
-        });
+        };
     }
 
     function getTimesArticles(politicianName) {
